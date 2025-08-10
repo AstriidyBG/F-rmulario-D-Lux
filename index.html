@@ -287,34 +287,19 @@
   }
 
   function buildFormattedText(data) {
+    // Texto compacto e reduzido para facilitar copiar e colar no chat sem travar
     return `𑁍ࠬܓ Formulário N.G.T : 📜
 ━━━━━━━━━━━━━━━━━━
-1 ➜ Qual a sua idade? 🧬⏳
-⌦ ${data.age || '___'} anos 🕐
+1 ➜ Idade: ${data.age || '___'} anos
+2 ➜ Recrutador: ${data.recruiter || '___'}
+3 ➜ Apelido: ${data.preferredName || '___'}
+4 ➜ Função: ${data.role || '___'}
+5 ➜ Atividade: ${data.activityLevel || '___'}
+6 ➜ Horário: ${data.activeHours || '___'}
+7 ➜ Outra família?: ${data.previousFamily ? data.previousFamily : '___'}
+8 ➜ Obs: ${data.notes ? data.notes : '___'}
 ━━━━━━━━━━━━━━━━━━
-2 ➜ Nome do seu recrutador? 🛰🧠
-⌦ ${data.recruiter || '___'} ! 🕵️‍♂️
-━━━━━━━━━━━━━━━━━━
-3 ➜ Como prefere ser chamado? 📝
-⌦ ${data.preferredName || '___'} ! 🗺️
-━━━━━━━━━━━━━━━━━━
-4 ➜ Função escolhida 🎖️
-⌦ ${data.role || '___'}
-━━━━━━━━━━━━━━━━━━
-5 ➜ Nível de atividade 📈
-⌦ ${data.activityLevel || '___'}
-━━━━━━━━━━━━━━━━━━
-6 ➜ Horário mais ativo 🕒
-⌦ ${data.activeHours || '___'}
-━━━━━━━━━━━━━━━━━━
-7 ➜ Já participou de outra família? 🏰
-⌦ ${data.previousFamily || '___'}
-━━━━━━━━━━━━━━━━━━
-8 ➜ Observações adicionais
-⌦ ${data.notes || '___'}
-━━━━━━━━━━━━━━━━━━
-(Enviado via formulário N.G.T)
-`;
+(Enviado via formulário N.G.T)`;
   }
 
   const finalizeBtn = document.getElementById('finalizeBtn');
