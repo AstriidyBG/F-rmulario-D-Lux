@@ -315,7 +315,7 @@ input:focus, textarea:focus, select:focus {
     </button>
   </div>
   <h1>D-LUX</h1>
-  <p>RECRUTAMENTO OPERACIONAL // SCARLET PROTOCOL</p>
+  <p>RECRUTAMENTO OPERACIONALL</p>
 </header>
 
 <div class="container">
@@ -485,28 +485,17 @@ function generate() {
     const nick = document.getElementById('nickname').value || 'AGENTE ANONIMO';
     const role = document.querySelector('input[name="role"]:checked')?.value || "NÃO DEFINIDA";
     
-    const report = `⚜️ **PROTOCOLO DE RECRUTAMENTO D-LUX** ⚜️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-👤 **IDENTIFICAÇÃO DO CANDIDATO**
-• **OPERADOR:** ${nick.toUpperCase()}
-• **IDADE:** ${document.getElementById('age').value || '--'} anos
-• **RECRUTADOR:** ${document.getElementById('recruiter').value || 'Autônomo'}
+const report = `⚜️ RECRUTAMENTO D-LUX ⚜️
+👤 NICK: ${nick.toUpperCase()} | IDADE: ${document.getElementById('age').value || '--'}
+🎯 FUNÇÃO: ${role}
+👤 RECRUTADOR: ${document.getElementById('recruiter').value || 'Autônomo'}
+⏰ TEMPO: ${document.getElementById('time').value || '--'}
 
-🎯 **PERFIL OPERACIONAL**
-• **FUNÇÃO ALVO:** ${role}
-• **TEMPO DIÁRIO:** ${document.getElementById('time').value || 'Não informado'}
-• **HISTÓRICO:** ${document.getElementById('history').value || 'Limpo'}
+🔥 MOTIVAÇÃO: ${document.getElementById('whyJoin').value || '--'}
+✨ SKILLS: ${document.getElementById('skills').value || '--'}
+🏛️ HISTÓRICO: ${document.getElementById('history').value || 'Limpo'}
 
-🔥 **MOTIVAÇÃO E DIFERENCIAL**
-• **POR QUE ENTRAR?**
-> ${document.getElementById('whyJoin').value || 'Nenhuma declaração.'}
-
-• **DIFERENCIAL:**
-> ${document.getElementById('skills').value || 'Nenhuma habilidade listada.'}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📅 **REGISTRADO EM:** ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR')}
-**STATUS:** [AGUARDANDO APROVAÇÃO HQ]`;
+📅 ${new Date().toLocaleDateString('pt-BR')} | [AGUARDANDO HQ]`;
 
     document.getElementById('finalText').innerText = report;
     document.getElementById('resultArea').style.display = 'block';
