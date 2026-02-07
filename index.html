@@ -9,7 +9,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
 
-/* ========== CORES E VARIÁVEIS (INSPIRADAS NA IMAGEM) ========== */
+/* ========== CORES E VARIÁVEIS ========== */
 :root {
   --bg-color: #070707;
   --accent-red: #e61e25; 
@@ -21,6 +21,7 @@
   --text-primary: #ffffff;
   --text-secondary: #94a3b8;
   --discord: #5865f2;
+  --success-green: #22c55e;
 }
 
 /* ========== RESET E BASE ========== */
@@ -43,7 +44,7 @@ body {
   padding: 60px 20px;
 }
 
-/* ========== CABEÇALHO IMPACTANTE ========== */
+/* ========== CABEÇALHO ========== */
 header {
   width: 100%;
   max-width: 700px;
@@ -82,7 +83,7 @@ header p {
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 4px; /* Estilo sharp da imagem */
+  border-radius: 4px;
   overflow: hidden;
   transition: all 0.3s ease;
 }
@@ -99,7 +100,6 @@ header p {
   cursor: pointer;
   background: rgba(255,255,255,0.02);
 }
-.card-header:hover { background: rgba(255,255,255,0.04); }
 
 .card-title {
   font-weight: 800;
@@ -126,7 +126,7 @@ header p {
   border-top: 1px solid var(--border);
 }
 
-/* ========== INPUTS E FORMULÁRIO ========== */
+/* ========== FORMULÁRIO ========== */
 .field-group { margin-bottom: 20px; }
 
 label {
@@ -148,15 +148,12 @@ input, textarea, select {
   font-family: inherit;
   font-size: 0.95rem;
   border-radius: 4px;
-  transition: 0.2s;
 }
-input:focus, textarea:focus, select:focus {
+input:focus, textarea:focus {
   border-color: var(--accent-red);
   background: #000;
-  box-shadow: 0 0 10px rgba(230, 30, 37, 0.15);
 }
 
-/* Funções Chips */
 .radio-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -177,10 +174,9 @@ input:focus, textarea:focus, select:focus {
 .chip input:checked + label {
   border-color: var(--accent-red);
   background: var(--deep-red);
-  color: #fff;
 }
 
-/* ========== BOTÕES ORGANIZADOS ========== */
+/* ========== BOTÕES ========== */
 .action-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -204,22 +200,10 @@ input:focus, textarea:focus, select:focus {
   border-radius: 4px;
 }
 
-.btn-main {
-  background: var(--accent-red);
-  color: #fff;
-}
-.btn-main:hover {
-  background: #ff2b33;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px var(--glow);
-}
+.btn-main { background: var(--accent-red); color: #fff; }
+.btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--glow); }
 
-.btn-secondary {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  color: #fff;
-}
-.btn-secondary:hover { background: rgba(255,255,255,0.1); }
+.btn-secondary { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; }
 
 .btn-discord {
   grid-column: span 2;
@@ -227,7 +211,6 @@ input:focus, textarea:focus, select:focus {
   color: #fff;
   display: none;
 }
-.btn-discord:hover { filter: brightness(1.2); transform: translateY(-2px); }
 
 /* ========== PREVIEW AREA ========== */
 .preview-container {
@@ -236,23 +219,66 @@ input:focus, textarea:focus, select:focus {
 }
 .preview-box {
   background: #000;
-  border: 1px solid var(--accent-red);
+  border: 2px solid var(--accent-red);
   padding: 40px;
   position: relative;
   border-radius: 4px;
 }
+
+/* BOTÃO DE COPIAR MELHORADO */
 .copy-badge {
   position: absolute;
-  top: 15px; right: 20px;
+  top: 15px; 
+  right: 20px;
   font-size: 0.65rem;
   font-weight: 900;
   color: var(--accent-red);
   cursor: pointer;
-  padding: 5px 10px;
+  padding: 6px 14px;
   border: 1px solid var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  user-select: none;
 }
 
-/* ========== PLAYER E SISTEMA ========== */
+.copy-badge:hover {
+  background: var(--accent-red);
+  color: #fff;
+}
+
+.copy-badge.copied {
+  background: var(--success-green);
+  border-color: var(--success-green);
+  color: #fff;
+  padding-right: 18px;
+}
+
+/* ========== MODAIS ========== */
+.modal-overlay {
+  display: none;
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.9);
+  z-index: 1001;
+  backdrop-filter: blur(10px);
+}
+.modal-panel {
+  display: none;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; max-width: 450px;
+  background: #0d0d0d;
+  border: 1px solid var(--accent-red);
+  padding: 40px;
+  z-index: 1002;
+}
+
+/* ========== PLAYER ========== */
 .music-player {
   position: fixed;
   bottom: 30px;
@@ -270,25 +296,6 @@ input:focus, textarea:focus, select:focus {
   border: none;
   width: 40px; height: 40px;
   color: #fff; cursor: pointer;
-}
-
-.modal-overlay {
-  display: none;
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.95);
-  z-index: 1001;
-  backdrop-filter: blur(10px);
-}
-.modal-panel {
-  display: none;
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%; max-width: 450px;
-  background: #0d0d0d;
-  border: 1px solid var(--accent-red);
-  padding: 40px;
-  z-index: 1002;
 }
 
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -315,11 +322,11 @@ input:focus, textarea:focus, select:focus {
     </button>
   </div>
   <h1>D-LUX</h1>
-  <p>RECRUTAMENTO OPERACIONALL</p>
+  <p>RECRUTAMENTO OPERACIONAL</p>
 </header>
 
 <div class="container">
-  <!-- SEÇÃO 1: DADOS DO CANDIDATO -->
+  <!-- SEÇÃO 1 -->
   <section class="card open" id="card-1">
     <div class="card-header" onclick="toggleCard('card-1')">
       <div class="card-title"><i class="fas fa-user-secret"></i> Dados do Candidato</div>
@@ -343,7 +350,7 @@ input:focus, textarea:focus, select:focus {
     </div>
   </section>
 
-  <!-- SEÇÃO 2: ESPECIALIZAÇÃO -->
+  <!-- SEÇÃO 2 -->
   <section class="card" id="card-2">
     <div class="card-header" onclick="toggleCard('card-2')">
       <div class="card-title"><i class="fas fa-bullseye"></i> Perfil e Motivação</div>
@@ -382,7 +389,7 @@ input:focus, textarea:focus, select:focus {
     </div>
   </section>
 
-  <!-- SEÇÃO 3: DISPONIBILIDADE -->
+  <!-- SEÇÃO 3 -->
   <section class="card" id="card-3">
     <div class="card-header" onclick="toggleCard('card-3')">
       <div class="card-title"><i class="fas fa-clock"></i> Logística e Disponibilidade</div>
@@ -416,7 +423,9 @@ input:focus, textarea:focus, select:focus {
   <!-- RESULTADO -->
   <div id="resultArea" class="preview-container" style="display:none;">
     <div class="preview-box">
-        <div class="copy-badge" onclick="copyReport()">[ COPIAR TEXTO ]</div>
+        <div class="copy-badge" id="copyBtn" onclick="copyReport()">
+          <i class="fas fa-copy"></i> <span>COPIAR TEXTO</span>
+        </div>
         <pre id="finalText" style="white-space: pre-wrap; font-size: 0.9rem; line-height: 1.6; color: #fff;"></pre>
     </div>
   </div>
@@ -485,7 +494,7 @@ function generate() {
     const nick = document.getElementById('nickname').value || 'AGENTE ANONIMO';
     const role = document.querySelector('input[name="role"]:checked')?.value || "NÃO DEFINIDA";
     
-const report = `⚜️ RECRUTAMENTO D-LUX ⚜️
+    const report = `⚜️ RECRUTAMENTO D-LUX ⚜️
 👤 NICK: ${nick.toUpperCase()} | IDADE: ${document.getElementById('age').value || '--'}
 🎯 FUNÇÃO: ${role}
 👤 RECRUTADOR: ${document.getElementById('recruiter').value || 'Autônomo'}
@@ -495,11 +504,15 @@ const report = `⚜️ RECRUTAMENTO D-LUX ⚜️
 ✨ SKILLS: ${document.getElementById('skills').value || '--'}
 🏛️ HISTÓRICO: ${document.getElementById('history').value || 'Limpo'}
 
-📅 ${new Date().toLocaleDateString('pt-BR')} | [AGUARDANDO HQ]`;
+📅 ${new Date().toLocaleDateString('pt-BR')} | [PROTOCOLO GERADO]`;
 
     document.getElementById('finalText').innerText = report;
     document.getElementById('resultArea').style.display = 'block';
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    
+    // Smooth scroll para o resultado
+    setTimeout(() => {
+      document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
 }
 
 async function sendDiscord() {
@@ -515,20 +528,66 @@ async function sendDiscord() {
             body: JSON.stringify({ content: content })
         });
         if(res.ok) {
-            btn.innerText = "TRANSMISSÃO CONCLUÍDA";
-            setTimeout(checkDiscordBtn, 2000);
+            btn.innerHTML = '<i class="fas fa-check"></i> TRANSMISSÃO CONCLUÍDA';
+            setTimeout(checkDiscordBtn, 3000);
         } else throw new Error();
     } catch(e) {
-        btn.innerText = "FALHA NA CONEXÃO";
-        setTimeout(checkDiscordBtn, 2000);
+        btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> FALHA NA CONEXÃO';
+        setTimeout(checkDiscordBtn, 3000);
     }
 }
 
+/**
+ * FUNÇÃO DE COPIAR MELHORADA
+ */
 function copyReport() {
-    navigator.clipboard.writeText(document.getElementById('finalText').innerText);
-    const badge = document.querySelector('.copy-badge');
-    badge.innerText = "[ COPIADO! ]";
-    setTimeout(() => badge.innerText = "[ COPIAR TEXTO ]", 2000);
+    const text = document.getElementById('finalText').innerText;
+    const btn = document.getElementById('copyBtn');
+    const btnText = btn.querySelector('span');
+    const btnIcon = btn.querySelector('i');
+
+    // Tenta usar a API moderna primeiro
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(updateUI).catch(fallbackCopy);
+    } else {
+        fallbackCopy();
+    }
+
+    function fallbackCopy() {
+        // Fallback para navegadores antigos ou contextos não seguros
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            updateUI();
+        } catch (err) {
+            console.error('Erro ao copiar:', err);
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function updateUI() {
+        // Feedback Visual de Sucesso
+        btn.classList.add('copied');
+        btnText.innerText = "COPIADO!";
+        btnIcon.className = "fas fa-check-double";
+
+        // Limpa a seleção do texto para ficar visualmente limpo
+        window.getSelection().removeAllRanges();
+
+        // Reseta o botão após 2.5 segundos
+        setTimeout(() => {
+            btn.classList.remove('copied');
+            btnText.innerText = "COPIAR TEXTO";
+            btnIcon.className = "fas fa-copy";
+        }, 2500);
+    }
 }
 
 function saveDraft() {
@@ -562,7 +621,10 @@ window.onload = () => {
         document.getElementById('skills').value = draft.skills || '';
         document.getElementById('time').value = draft.time || '';
         document.getElementById('history').value = draft.history || '';
-        if(draft.role) document.getElementById(draft.role).checked = true;
+        if(draft.role) {
+          const el = document.getElementById(draft.role);
+          if(el) el.checked = true;
+        }
     }
     checkDiscordBtn();
 }
