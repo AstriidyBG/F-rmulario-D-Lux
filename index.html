@@ -1,466 +1,437 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aliança D-LUX | Operação Elite</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D-LUX | GRUNGE ELITE ANIMATED</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Syncopate:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-:root {
-  --gold: #d4af37;
-  --crimson: #ff0000;
-  --bg-dark: #000000;
-  --panel-bg: rgba(10, 10, 10, 0.95);
-  --border-red: #440000;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-}
+    <style>
+        :root {
+            --accent: #ff003c; /* Vermelho Neon Trap */
+            --bg-dark: #050505;
+            --panel-bg: rgba(15, 15, 15, 0.9);
+            --border-glow: rgba(255, 0, 60, 0.5);
+            --text-main: #ffffff;
+            --text-dim: #666;
+            --grunge-texture: url('https://www.transparenttextures.com/patterns/stardust.png');
+        }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  background-color: var(--bg-dark);
-  color: var(--text-primary);
-  font-family: 'Rajdhani', sans-serif;
-  overflow-x: hidden;
-  background-image: 
-    linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)),
-    url('https://i.pinimg.com/736x/84/fe/4b/84fe4b3e1fba5aa35f3975d051d1f77e.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-}
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            background-image: var(--grunge-texture), linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://i.pinimg.com/originals/84/fe/4b/84fe4b3e1fba5aa35f3975d051d1f77e.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
 
-/* Player de Música */
-.music-player-card {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(10, 10, 10, 0.9);
-  border: 1px solid var(--crimson);
-  padding: 10px 15px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  z-index: 2000;
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
-}
+        /* Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            pointer-events: none;
+            background-size: 100% 2px, 3px 100%;
+        }
 
-.music-info marquee {
-  width: 100px;
-  font-size: 0.7rem;
-  color: var(--crimson);
-  text-transform: uppercase;
-}
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 60, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 0, 60, 0); transform: scale(1.05); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 60, 0); transform: scale(1); }
+        }
 
-.play-btn {
-  background: var(--crimson);
-  color: white;
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+        @keyframes border-glow {
+            0% { border-color: #440000; box-shadow: 0 0 5px rgba(255, 0, 60, 0.2); }
+            50% { border-color: var(--accent); box-shadow: 0 0 20px rgba(255, 0, 60, 0.6); }
+            100% { border-color: #440000; box-shadow: 0 0 5px rgba(255, 0, 60, 0.2); }
+        }
 
-/* Header Estilo Perfil com Capa Customizável */
-.header-profile {
-  width: 95%;
-  max-width: 550px;
-  background: #000;
-  margin: 20px auto;
-  border-radius: 12px;
-  border: 1px solid var(--border-red);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-}
+        @keyframes scanner {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
 
-.profile-banner {
-  width: 100%;
-  height: 120px;
-  background-size: cover;
-  background-position: center;
-  /* ATUALIZADO: Sua nova imagem de banner abaixo */
-  background-image: url('https://i.pinimg.com/1200x/13/67/e1/1367e180de74d9fd20c3782cbd6c45e5.jpg'); 
-  position: relative;
-}
+        /* Scanner Line */
+        .scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+            z-index: 5;
+            left: 0;
+            pointer-events: none;
+            opacity: 0.3;
+            animation: scanner 3s linear infinite;
+        }
 
-.profile-banner::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, #000);
-}
+        /* Player */
+        .music-player-card {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #000;
+            border: 2px solid var(--accent);
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            box-shadow: 5px 5px 0px var(--accent);
+            animation: border-glow 3s infinite;
+        }
 
-.profile-content {
-  padding: 0 20px 20px 20px;
-  margin-top: -30px; 
-  position: relative;
-  z-index: 2;
-}
+        .play-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            animation: pulse-red 2s infinite;
+        }
 
-.profile-main {
-  display: flex;
-  align-items: flex-end;
-  gap: 15px;
-}
+        /* Layout */
+        .header-profile {
+            width: 95%;
+            max-width: 600px;
+            background: #000;
+            margin: 40px auto;
+            border: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 10px 10px 0px rgba(255, 0, 60, 0.1);
+        }
 
-.avatar-box {
-  width: 80px;
-  height: 80px;
-  border-radius: 12px;
-  background: #050505;
-  border: 2px solid var(--crimson);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(255,0,0,0.3);
-}
+        .avatar-box {
+            width: 100px;
+            height: 100px;
+            border: 3px solid var(--accent);
+            background: #000;
+            overflow: hidden;
+            box-shadow: 5px 5px 0px var(--accent);
+            z-index: 10;
+            position: relative;
+        }
 
-.avatar-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+        .profile-info h1 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.5rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
 
-.profile-info {
-    padding-bottom: 5px;
-}
+        .spec-item {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
 
-.profile-info h1 {
-  font-family: 'Cinzel', serif;
-  font-size: 1.6rem;
-  letter-spacing: 2px;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
+        .spec-item.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: #fff;
+        }
 
-.id-label {
-  font-size: 0.7rem;
-  color: #888;
-  background: rgba(0,0,0,0.6);
-  padding: 2px 8px;
-  border-radius: 4px;
-  border: 1px solid #222;
-}
+        .submit-btn {
+            width: 100%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 18px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
 
-.stats-row {
-  display: flex;
-  gap: 15px;
-  margin-top: 10px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
+        .submit-btn:hover {
+            filter: brightness(1.2);
+            transform: translateY(-2px);
+        }
 
-.stats-row i { color: var(--crimson); }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
 
-.tag-elite {
-  background: rgba(255, 0, 0, 0.15);
-  color: var(--crimson);
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  display: inline-block;
-  margin-top: 10px;
-  border: 1px solid rgba(255, 0, 0, 0.3);
-  text-transform: uppercase;
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-/* Quadro da Família */
-.container {
-  width: 95%;
-  max-width: 550px;
-  margin: 0 auto;
-}
+        input, textarea {
+            width: 100%; 
+            background: #0a0a0a; 
+            border: 1px solid #333; 
+            padding: 12px; 
+            color: #fff;
+            outline: none;
+            font-family: 'Rajdhani', sans-serif;
+            margin-top: 5px;
+        }
 
-.section-header {
-  font-family: 'Cinzel', serif;
-  font-size: 1.1rem;
-  margin: 30px 0 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-left: 3px solid var(--crimson);
-  padding-left: 10px;
-  color: #fff;
-}
+        input:focus, textarea:focus {
+            border-color: var(--accent);
+        }
 
-.rules-box {
-  background: var(--panel-bg);
-  border-radius: 8px;
-  padding: 20px;
-  border: 1px solid #1a1a1a;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-}
+        .input-label {
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-.rule-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 12px;
-  font-size: 0.9rem;
-  color: #ccc;
-  line-height: 1.4;
-}
+        .input-group {
+            margin-bottom: 18px;
+        }
 
-.rule-num { color: var(--crimson); font-weight: 800; }
+        .copy-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-/* Formulário Operacional */
-.operation-container {
-  background: var(--panel-bg);
-  border: 1px solid var(--border-red);
-  padding: 30px;
-  margin-top: 30px;
-  margin-bottom: 100px;
-}
-
-.form-tag {
-  background: var(--crimson);
-  color: white;
-  display: inline-block;
-  padding: 5px 15px;
-  font-weight: bold;
-  font-size: 0.8rem;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-.input-group { margin-bottom: 20px; }
-
-label {
-  display: block;
-  color: var(--crimson);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-input, textarea, select {
-  width: 100%;
-  background: #000;
-  border: 1px solid #222;
-  padding: 12px;
-  color: #fff;
-  font-family: 'Rajdhani', sans-serif;
-}
-
-input:focus { border-color: var(--crimson); outline: none; }
-
-.spec-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.spec-item {
-  background: #050505;
-  border: 1px solid #222;
-  padding: 12px;
-  color: #444;
-  text-align: center;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.spec-item.active {
-  border-color: var(--crimson);
-  color: var(--crimson);
-  background: rgba(255,0,0,0.05);
-}
-
-.submit-btn {
-  width: 100%;
-  background: var(--crimson);
-  color: #fff;
-  border: none;
-  padding: 18px;
-  font-weight: 900;
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-  cursor: pointer;
-  margin-top: 25px;
-  text-transform: uppercase;
-}
-
-#protocolOutput {
-  display: none;
-  background: #000;
-  border: 1px solid var(--crimson);
-  padding: 15px;
-  margin-top: 20px;
-  font-family: monospace;
-  font-size: 0.8rem;
-  color: #ff0000;
-  white-space: pre-wrap;
-}
-
-</style>
+    </style>
 </head>
 <body>
 
-<!-- PLAYER -->
 <div class="music-player-card">
-  <button class="play-btn" onclick="toggleMusic()">
-    <i class="fas fa-play" id="playIcon"></i>
-  </button>
-  <div class="music-info">
-    <p style="font-size: 0.5rem; color: #555;">D-LUX RADIO</p>
-    <marquee>Matuê - 30 NO BEAT (Ambience Version)</marquee>
-  </div>
-  <audio id="myAudio" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-  </audio>
+    <button class="play-btn" onclick="toggleMusic()">
+        <i class="fas fa-play" id="playIcon"></i>
+    </button>
+    <div class="music-info">
+        <marquee>TRA NO BEAT - MATUÊ X D-LUX EXCLUSIVE</marquee>
+        <span style="font-size: 0.6rem; color: var(--accent); font-weight: bold;">LIVE STATUS: ON AIR</span>
+    </div>
+    <audio id="myAudio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mpeg">
+    </audio>
 </div>
 
-<!-- PERFIL SUPERIOR COM CAPA -->
 <div class="header-profile">
-  <div class="profile-banner"></div>
-  
-  <div class="profile-content">
-    <div class="profile-main">
-      <div class="avatar-box">
-        <img src="https://i.pinimg.com/736x/92/c5/d8/92c5d80effca7e40f59dbb9ea405cdaf.jpg" alt="Avatar">
-      </div>
-      <div class="profile-info">
-        <h1>『D-LUX』</h1>
-        <span class="id-label">ID: dlux_op15</span>
-      </div>
+    <div class="scanner-line"></div>
+    <div class="profile-banner" style="width: 100%; height: 160px; background-image: url('https://i.pinimg.com/1200x/13/67/e1/1367e180de74d9fd20c3782cbd6c45e5.jpg'); background-size: cover;"></div>
+    <div class="profile-content" style="padding: 20px; margin-top: -50px; background: linear-gradient(to top, #000 70%, transparent);">
+        <div class="avatar-box">
+            <img src="https://i.pinimg.com/736x/92/c5/d8/92c5d80effca7e40f59dbb9ea405cdaf.jpg" alt="D-LUX" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="profile-info">
+            <h1>『D-LUX』</h1>
+            <p style="color: var(--accent); font-size: 0.8rem; letter-spacing: 3px; font-weight: bold;">[ OPERAÇÃO ELITE HAGO ]</p>
+        </div>
     </div>
-    
-    <div class="stats-row">
-      <span><i class="fas fa-users"></i> 39/80 Membros</span>
-      <span><i class="fas fa-shield-alt"></i> Nível Máx.</span>
-    </div>
-    <div class="tag-elite">Aliança Bronze</div>
-  </div>
 </div>
 
-<div class="container">
-  
-  <!-- QUADRO DA FAMÍLIA -->
-  <h2 class="section-header">QUADRO DA FAMÍLIA</h2>
-  <div class="rules-box">
-    <div class="rule-row"><span class="rule-num">1.</span> Respeite líderes e membros acima de tudo.</div>
-    <div class="rule-row"><span class="rule-num">2.</span> Sem ofensas, spam ou confusão no chat.</div>
-    <div class="rule-row"><span class="rule-num">3.</span> Seja ativo e pontual em reuniões.</div>
-    <div class="rule-row"><span class="rule-num">4.</span> Postura de elite em todas as salas.</div>
-    <div class="rule-row"><span class="rule-num">5.</span> Decisões da liderança são absolutas.</div>
-    <div class="rule-row"><span class="rule-num">6.</span> Avise ausências superiores a 2 dias.</div>
-    <div class="rule-row"><span class="rule-num">7.</span> O que te diferencia é a sua atitude.</div>
-    <div style="color: var(--crimson); text-align: center; font-size: 0.8rem; margin-top: 10px; font-weight: bold;">
-      "SOMOS POUCOS, MAS RESPEITADOS." 👑
-    </div>
-  </div>
+<div class="container" style="max-width: 700px; margin: 0 auto; padding: 20px;">
 
-  <!-- ALISTAMENTO -->
-  <h2 class="section-header">ALISTAMENTO OPERACIONAL</h2>
-  <div class="operation-container">
-    <div class="form-tag">Identificação</div>
-    
-    <div class="input-group">
-      <label>Nick (Nome de Operação)</label>
-      <input type="text" id="nick" placeholder="Seu nick no jogo">
-    </div>
+    <!-- TAGS -->
+    <div class="reveal">
+        <h2 style="color: var(--accent); font-family: 'Permanent Marker'; margin-bottom: 15px;">GERADOR DE IDENTIDADE</h2>
+        <div style="background: #111; padding: 20px; border: 1px dashed var(--accent); margin-bottom: 40px;">
+            <div class="input-group">
+                <span class="input-label">NOME PARA TAG</span>
+                <input type="text" id="tagName" placeholder="Insira seu nome..." oninput="updateTags()">
+            </div>
+            
+            <!-- MOBILE -->
+            <div style="margin-top: 15px;">
+                <span class="input-label" style="font-size: 0.6rem; color: #888;">VERSÃO MOBILE (CELULAR)</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #050505; padding: 12px; border: 1px solid #222; margin-top: 5px;">
+                    <span id="tagMobile" style="font-size: 0.8rem;">᭄͢🍸 𝆺𝅥⃝ [NOME]-💉⚑⃟ MB ≛͜͡࿐</span>
+                    <button class="copy-btn" onclick="copyTag('tagMobile')">COPIAR</button>
+                </div>
+            </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-      <div class="input-group">
-        <label>Idade Atual</label>
-        <input type="number" id="age" placeholder="Ex: 19">
-      </div>
-      <div class="input-group">
-        <label>ID Numérico</label>
-        <input type="number" id="gameId" placeholder="ID do Jogo">
-      </div>
+            <!-- PC -->
+            <div style="margin-top: 15px;">
+                <span class="input-label" style="font-size: 0.6rem; color: #888;">VERSÃO PC (COMPUTADOR)</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #050505; padding: 12px; border: 1px solid #222; margin-top: 5px;">
+                    <span id="tagPC" style="font-size: 0.8rem;">᭄͢🍸 𝆺𝅥⃝[NOME]⍟-💉🏴‍☠️⃟ PC ≛͜͡࿐</span>
+                    <button class="copy-btn" onclick="copyTag('tagPC')">COPIAR</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="form-tag">Perfil e Especialidade</div>
-    
-    <div class="input-group">
-      <label>Especialização Desejada</label>
-      <div class="spec-grid">
-        <div class="spec-item" onclick="pickRole(this, 'SEGURANÇA')">SEGURANÇA</div>
-        <div class="spec-item" onclick="pickRole(this, 'RECRUTADOR')">RECRUTADOR</div>
-        <div class="spec-item" onclick="pickRole(this, 'CONSELHEIRO')">CONSELHEIRO</div>
-        <div class="spec-item" onclick="pickRole(this, 'DIVULGADOR')">DIVULGADOR</div>
-      </div>
+    <!-- ALISTAMENTO -->
+    <div class="reveal">
+        <h2 style="color: var(--accent); font-family: 'Permanent Marker'; margin-bottom: 15px;">PROTOCOLO DE ALISTAMENTO</h2>
+        <div style="background: #000; border: 1px solid #222; padding: 30px; margin-bottom: 60px; position: relative;">
+            <div class="scanner-line"></div>
+
+            <!-- Pergunta 1 -->
+            <div class="input-group">
+                <label class="input-label">Nome ou Apelido (Como prefere ser chamado?)</label>
+                <input type="text" id="f_callname" placeholder="Ex: Bolt / Ricardo">
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="input-group">
+                <label class="input-label">Idade Atual</label>
+                <input type="number" id="f_age" placeholder="Sua idade">
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="input-group">
+                <label class="input-label">Nick no Hago / ID</label>
+                <input type="text" id="f_nick" placeholder="Seu nick oficial">
+            </div>
+
+            <!-- Pergunta 4 (Seleção de Especialidades Atualizada) -->
+            <div class="input-group">
+                <label class="input-label">Especialidade Desejada</label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px;">
+                    <div class="spec-item" onclick="pickRole(this, 'SEGURANÇA')">SEGURANÇA</div>
+                    <div class="spec-item" onclick="pickRole(this, 'RECRUTADOR')">RECRUTADOR</div>
+                    <div class="spec-item" onclick="pickRole(this, 'CARISMA')">CARISMA</div>
+                    <div class="spec-item" onclick="pickRole(this, 'DIVULGADOR')">DIVULGADOR</div>
+                    <div class="spec-item" style="grid-column: span 2;" onclick="pickRole(this, 'MODERADOR DE SALAS')">MODERADOR DE SALAS</div>
+                </div>
+            </div>
+
+            <!-- Pergunta 5 -->
+            <div class="input-group">
+                <label class="input-label">Qual o seu objetivo na família?</label>
+                <textarea id="f_goal" rows="2" placeholder="O que você veio fazer na D-LUX?"></textarea>
+            </div>
+
+            <!-- Pergunta 6 -->
+            <div class="input-group">
+                <label class="input-label">O que te diferencia dos outros membros?</label>
+                <textarea id="f_diff" rows="2" placeholder="Por que devemos escolher você?"></textarea>
+            </div>
+
+            <button class="submit-btn" id="submitBtn" onclick="sendToDiscord()">TRANSMITIR DADOS</button>
+            <p class="discord-note">CONEXÃO DIRETA COM A CENTRAL D-LUX NO DISCORD</p>
+        </div>
     </div>
-
-    <div class="input-group">
-      <label>Motivação para entrar na D-LUX</label>
-      <textarea id="motivation" rows="3" placeholder="Por que quer se juntar a nós?"></textarea>
-    </div>
-
-    <button class="submit-btn" onclick="sendProtocol()">Enviar Protocolo</button>
-
-    <div id="protocolOutput"></div>
-
-    <div style="text-align: center; margin-top: 30px;">
-      <a href="atlas_protocol.html" style="color: #444; text-decoration: none; font-size: 0.7rem;">PORTAL ATLAS <i class="fas fa-external-link-alt"></i></a>
-    </div>
-  </div>
-
 </div>
 
 <script>
-let finalRole = "";
+    const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1473067070164959546/w9j63fmXdRzbhuoQYS0nRMmUAqkmPFForLBJr2doZax11NRyF4JzommKhpgYi2y6HkYQ";
 
-function pickRole(el, role) {
-  document.querySelectorAll('.spec-item').forEach(i => i.classList.remove('active'));
-  el.classList.add('active');
-  finalRole = role;
-}
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        reveals.forEach(r => {
+            if (r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add("active");
+        });
+    }
+    window.addEventListener("scroll", reveal);
+    window.onload = reveal;
 
-function toggleMusic() {
-  const a = document.getElementById('myAudio');
-  const i = document.getElementById('playIcon');
-  if (a.paused) { a.play(); i.className = "fas fa-pause"; }
-  else { a.pause(); i.className = "fas fa-play"; }
-}
+    let selectedRole = "";
+    function pickRole(el, role) {
+        document.querySelectorAll('.spec-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        selectedRole = role;
+    }
 
-function sendProtocol() {
-  const nick = document.getElementById('nick').value || "N/A";
-  const age = document.getElementById('age').value || "N/A";
-  const id = document.getElementById('gameId').value || "N/A";
-  const mot = document.getElementById('motivation').value || "N/A";
-  
-  const text = `
------------------------------------
-       PROTOCOLO D-LUX
------------------------------------
-NICK: ${nick.toUpperCase()}
-ID: ${id}
-IDADE: ${age} ANOS
-FUNÇÃO: ${finalRole || 'NÃO DEFINIDA'}
+    function updateTags() {
+        const name = document.getElementById('tagName').value || "[NOME]";
+        document.getElementById('tagMobile').innerText = `᭄͢🍸 𝆺𝅥⃝ ${name}-💉⚑⃟ MB ≛͜͡࿐`;
+        document.getElementById('tagPC').innerText = `᭄͢🍸 𝆺𝅥⃝${name}⍟-💉🏴‍☠️⃟ PC ≛͜͡࿐`;
+    }
 
-MOTIVAÇÃO:
-${mot}
+    function copyTag(id) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text);
+        const btn = event.target;
+        btn.innerText = "COPIADO";
+        setTimeout(() => btn.innerText = "COPIAR", 1000);
+    }
 
-SITUAÇÃO: SOB ANÁLISE
-DATA: ${new Date().toLocaleDateString('pt-BR')}
------------------------------------
-  `;
-  
-  const out = document.getElementById('protocolOutput');
-  out.innerText = text;
-  out.style.display = 'block';
-  out.scrollIntoView({behavior: 'smooth'});
-}
+    function toggleMusic() {
+        const audio = document.getElementById('myAudio');
+        const icon = document.getElementById('playIcon');
+        if (audio.paused) { audio.play(); icon.className = "fas fa-pause"; }
+        else { audio.pause(); icon.className = "fas fa-play"; }
+    }
+
+    async function sendToDiscord() {
+        const callname = document.getElementById('f_callname').value;
+        const age = document.getElementById('f_age').value;
+        const nick = document.getElementById('f_nick').value;
+        const goal = document.getElementById('f_goal').value;
+        const diff = document.getElementById('f_diff').value;
+        const btn = document.getElementById('submitBtn');
+
+        if (!nick || !selectedRole || !callname || !age) {
+            btn.innerText = "PREENCHA OS CAMPOS OBRIGATÓRIOS!";
+            setTimeout(() => btn.innerText = "TRANSMITIR DADOS", 2000);
+            return;
+        }
+
+        const data = {
+            username: "D-LUX RECRUTAMENTO",
+            avatar_url: "https://i.pinimg.com/736x/92/c5/d8/92c5d80effca7e40f59dbb9ea405cdaf.jpg",
+            embeds: [{
+                title: "🚨 NOVO ALISTAMENTO DETECTADO",
+                color: 16711740,
+                fields: [
+                    { name: "👤 NOME/APELIDO", value: callname, inline: true },
+                    { name: "🎂 IDADE", value: age, inline: true },
+                    { name: "🆔 NICK HAGO", value: nick, inline: true },
+                    { name: "⚔️ CARGO", value: selectedRole, inline: true },
+                    { name: "🎯 OBJETIVO", value: goal || "Não informado", inline: false },
+                    { name: "⭐ DIFERENCIAL", value: diff || "Não informado", inline: false }
+                ],
+                footer: { text: "D-LUX ELITE SYSTEM | PROTOCOLO ATUALIZADO" },
+                timestamp: new Date()
+            }]
+        };
+
+        btn.innerText = "ENVIANDO...";
+        btn.disabled = true;
+
+        try {
+            const response = await fetch(DISCORD_WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+            if (response.ok) {
+                btn.innerText = "ENVIADO COM SUCESSO!";
+                btn.style.background = "#00ff40";
+            } else {
+                throw new Error();
+            }
+        } catch (e) {
+            btn.innerText = "ERRO NO SINAL!";
+            btn.disabled = false;
+            btn.style.background = "#333";
+            setTimeout(() => {
+                btn.innerText = "TRANSMITIR DADOS";
+                btn.style.background = "var(--accent)";
+            }, 3000);
+        }
+    }
 </script>
-
 </body>
 </html>
