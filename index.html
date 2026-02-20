@@ -61,6 +61,11 @@
             100% { top: 110%; }
         }
 
+        @keyframes fadeInAlert {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .scanner-line {
             position: absolute; width: 100%; height: 2px;
             background: var(--accent); box-shadow: 0 0 15px var(--accent);
@@ -82,6 +87,7 @@
             width: 40px; height: 40px; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
             font-size: 1.2rem; animation: pulse-red 2s infinite;
+            border-radius: 50%;
         }
 
         /* Layout */
@@ -103,18 +109,106 @@
             color: var(--accent); text-transform: uppercase; margin-top: 10px;
         }
 
-        .spec-item {
-            border: 1px solid #333; padding: 12px; text-align: center;
-            cursor: pointer; font-weight: bold; transition: 0.3s;
-            font-size: 0.8rem; text-transform: uppercase;
+        /* Role Selection Grid */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
         }
 
-        .spec-item.active { background: var(--accent); color: #fff; border-color: #fff; }
+        .spec-item {
+            border: 1px solid #333; 
+            padding: 15px 10px; 
+            text-align: center;
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 0.85rem; 
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            background: rgba(10, 10, 10, 0.8);
+            color: #aaa;
+            border-radius: 4px;
+        }
+
+        .spec-item i {
+            font-size: 1.5rem;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+
+        .spec-item:hover {
+            border-color: var(--accent);
+            background: rgba(255, 0, 60, 0.05);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        .spec-item:hover i {
+            color: var(--accent);
+        }
+
+        .spec-item.active { 
+            background: var(--accent); 
+            color: #fff; 
+            border-color: #fff; 
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+        }
+
+        .spec-item.active i {
+            color: #fff;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+        }
+
+        /* Role Rule Alert Box */
+        .rule-alert {
+            display: none;
+            background: linear-gradient(90deg, rgba(255, 0, 60, 0.15) 0%, rgba(0,0,0,0.5) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            margin-top: 15px;
+            border-radius: 0 4px 4px 0;
+            animation: fadeInAlert 0.4s ease-out forwards;
+        }
+
+        .rule-alert.show {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .rule-alert strong {
+            color: var(--accent);
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rule-alert p {
+            color: #eee;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            font-weight: 500;
+        }
 
         .submit-btn {
             width: 100%; background: var(--accent); color: #fff; border: none;
             padding: 18px; font-family: 'Permanent Marker', cursive;
-            font-size: 1.5rem; cursor: pointer; margin-top: 20px; transition: 0.3s;
+            font-size: 1.5rem; cursor: pointer; margin-top: 25px; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 0, 60, 0.3);
+        }
+
+        .submit-btn:hover {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+            box-shadow: 0 5px 25px rgba(255, 0, 60, 0.5);
         }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
@@ -122,18 +216,19 @@
 
         input, textarea, select {
             width: 100%; background: #0a0a0a; border: 1px solid #333; 
-            padding: 12px; color: #fff; outline: none;
+            padding: 15px; color: #fff; outline: none;
             font-family: 'Rajdhani', sans-serif; margin-top: 5px;
+            font-size: 1rem; transition: 0.3s;
         }
 
-        input:focus, select:focus { border-color: var(--accent); }
+        input:focus, select:focus { border-color: var(--accent); box-shadow: inset 0 0 10px rgba(255,0,60,0.1); }
 
         .input-label {
-            color: var(--accent); font-size: 0.75rem; font-weight: bold;
+            color: var(--accent); font-size: 0.8rem; font-weight: bold;
             text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .input-group { margin-bottom: 18px; }
+        .input-group { margin-bottom: 20px; }
 
         .copy-btn {
             background: var(--accent); color: #fff; border: none;
@@ -160,7 +255,7 @@
     </button>
     <div class="music-info">
         <marquee>Meu Flow</marquee>
-        <span style="font-size: 0.6rem; color: var(--accent); font-weight: bold;">LIVE STATUS: ON AIR</span>
+        <span style="font-size: 0.6rem; color: var(--accent); font-weight: bold; letter-spacing: 1px;"><i class="fas fa-circle" style="font-size: 0.5rem; animation: pulse-red 1s infinite;"></i> LIVE STATUS: ON AIR</span>
     </div>
     <audio id="myAudio" loop>
         <source src="https://static.bandlab.com/on-demand-revisions/befb5420-9c17-4a45-68ae-3cf86b7e6341/befb5420-9c17-4a45-68ae-3cf86b7e6341-wav-44100-16bit.wav" type="audio/mpeg">
@@ -169,7 +264,7 @@
 
 <div class="header-profile">
     <div class="scanner-line"></div>
-    <div class="profile-banner" style="width: 100%; height: 160px; background-image: url('https://i.pinimg.com/1200x/13/67/e1/1367e180de74d9fd20c3782cbd6c45e5.jpg'); background-size: cover;"></div>
+    <div class="profile-banner" style="width: 100%; height: 160px; background-image: url('https://i.pinimg.com/1200x/13/67/e1/1367e180de74d9fd20c3782cbd6c45e5.jpg'); background-size: cover; background-position: center;"></div>
     <div class="profile-content" style="padding: 20px; margin-top: -50px; background: linear-gradient(to top, #000 70%, transparent);">
         <div class="avatar-box">
             <img src="https://i.pinimg.com/736x/92/c5/d8/92c5d80effca7e40f59dbb9ea405cdaf.jpg" alt="D-LUX" style="width: 100%; height: 100%; object-fit: cover;">
@@ -186,7 +281,7 @@
     <!-- TAGS -->
     <div class="reveal">
         <h2 style="color: var(--accent); font-family: 'Permanent Marker'; margin-bottom: 15px;">GERADOR DE IDENTIDADE</h2>
-        <div style="background: #111; padding: 25px; border: 1px dashed var(--accent); margin-bottom: 40px; box-shadow: 0 0 20px rgba(255,0,0,0.05);">
+        <div style="background: rgba(10,10,10,0.9); padding: 25px; border: 1px dashed var(--accent); margin-bottom: 40px; box-shadow: 0 0 20px rgba(255,0,0,0.05);">
             
             <div class="input-group">
                 <span class="input-label">NICKNAME (SEU NOME)</span>
@@ -217,7 +312,7 @@
                 <span class="input-label" style="font-size: 0.6rem; color: #888;">VERSÃO MOBILE (CELULAR)</span>
                 <div class="tag-display-box">
                     <span id="tagMobile" class="tag-text">👑᭄͢🥃 𝆺𝅥⃝ [NOME] 💉⚑⃟ MB ≛͜͡࿐</span>
-                    <button class="copy-btn" onclick="copyTag('tagMobile')">COPIAR</button>
+                    <button class="copy-btn" onclick="copyTag('tagMobile')"><i class="fas fa-copy"></i> COPIAR</button>
                 </div>
             </div>
 
@@ -226,7 +321,7 @@
                 <span class="input-label" style="font-size: 0.6rem; color: #888;">VERSÃO PC (COMPUTADOR)</span>
                 <div class="tag-display-box">
                     <span id="tagPC" class="tag-text">👑᭄͢🥃 𝆺𝅥⃝ [NOME] 💉🏴‍☠️⃟ PC ≛͜͡࿐</span>
-                    <button class="copy-btn" onclick="copyTag('tagPC')">COPIAR</button>
+                    <button class="copy-btn" onclick="copyTag('tagPC')"><i class="fas fa-copy"></i> COPIAR</button>
                 </div>
             </div>
         </div>
@@ -235,36 +330,63 @@
     <!-- ALISTAMENTO -->
     <div class="reveal">
         <h2 style="color: var(--accent); font-family: 'Permanent Marker'; margin-bottom: 15px;">PROTOCOLO DE ALISTAMENTO</h2>
-        <div style="background: #000; border: 1px solid #222; padding: 30px; margin-bottom: 60px; position: relative;">
+        <div style="background: rgba(0,0,0,0.95); border: 1px solid #222; padding: 30px; margin-bottom: 60px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
             <div class="scanner-line"></div>
 
             <div class="input-group">
-                <label class="input-label">Nome ou Apelido</label>
+                <label class="input-label"><i class="fas fa-id-badge"></i> Nome ou Apelido</label>
                 <input type="text" id="f_callname" placeholder="Ex: Bolt">
             </div>
 
             <div class="input-group">
-                <label class="input-label">Idade Atual</label>
+                <label class="input-label"><i class="fas fa-calendar-alt"></i> Idade Atual</label>
                 <input type="number" id="f_age" placeholder="Sua idade">
             </div>
 
             <div class="input-group">
-                <label class="input-label">Nick no Hago / ID</label>
+                <label class="input-label"><i class="fas fa-gamepad"></i> Nick no Hago / ID</label>
                 <input type="text" id="f_nick" placeholder="Seu nick oficial">
             </div>
 
             <div class="input-group">
-                <label class="input-label">Especialidade Desejada</label>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px;">
-                    <div class="spec-item" onclick="pickRole(this, 'SEGURANÇA')">SEGURANÇA</div>
-                    <div class="spec-item" onclick="pickRole(this, 'RECRUTADOR')">RECRUTADOR</div>
-                    <div class="spec-item" onclick="pickRole(this, 'CARISMA')">CARISMA</div>
-                    <div class="spec-item" onclick="pickRole(this, 'DIVULGADOR')">DIVULGADOR</div>
-                    <div class="spec-item" style="grid-column: span 2;" onclick="pickRole(this, 'MODERADOR DE SALAS')">MODERADOR DE SALAS</div>
+                <label class="input-label"><i class="fas fa-crosshairs"></i> Especialidade Desejada</label>
+                
+                <div class="roles-grid">
+                    <div class="spec-item" onclick="pickRole(this, 'SEGURANÇA')">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>SEGURANÇA</span>
+                    </div>
+                    <div class="spec-item" onclick="pickRole(this, 'RECRUTADOR')">
+                        <i class="fas fa-user-plus"></i>
+                        <span>RECRUTADOR</span>
+                    </div>
+                    <div class="spec-item" onclick="pickRole(this, 'CARISMA')">
+                        <i class="fas fa-face-laugh-beam"></i>
+                        <span>CARISMA</span>
+                    </div>
+                    <div class="spec-item" onclick="pickRole(this, 'DIVULGADOR')">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>DIVULGADOR</span>
+                    </div>
+                    <div class="spec-item" onclick="pickRole(this, 'MODERADOR DE SALAS')">
+                        <i class="fas fa-gavel"></i>
+                        <span>MODERADOR DE SALAS</span>
+                    </div>
+                    <div class="spec-item" onclick="pickRole(this, 'ADMIN. DE PARCERIAS')">
+                        <i class="fas fa-handshake"></i>
+                        <span>ADMIN. DE PARCERIAS</span>
+                    </div>
                 </div>
+
+                <!-- ALERTA DE REGRAS DINÂMICO -->
+                <div id="roleAlertBox" class="rule-alert">
+                    <strong><i class="fas fa-exclamation-triangle"></i> DIRETRIZES DA FUNÇÃO:</strong>
+                    <p id="roleAlertText"></p>
+                </div>
+
             </div>
 
-            <button class="submit-btn" id="submitBtn" onclick="sendToDiscord()">TRANSMITIR DADOS</button>
+            <button class="submit-btn" id="submitBtn" onclick="sendToDiscord()"><i class="fas fa-satellite-dish"></i> TRANSMITIR DADOS</button>
         </div>
     </div>
 </div>
@@ -272,7 +394,7 @@
 <script>
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1473067070164959546/w9j63fmXdRzbhuoQYS0nRMmUAqkmPFForLBJr2doZax11NRyF4JzommKhpgYi2y6HkYQ";
 
-    // MAPAS DE CARACTERES
+    // MAPAS DE CARACTERES E TAGS (Mantidos intactos)
     const charMaps = {
         serifBold: { a:'𝐚', b:'𝐛', c:'𝐜', d:'𝐝', e:'𝐞', f:'𝐟', g:'𝐠', h:'𝐡', i:'𝐢', j:'𝐣', k:'𝐤', l:'𝐥', m:'𝐦', n:'𝐧', o:'𝐨', p:'𝐩', q:'𝐪', r:'𝐫', s:'𝐬', t:'𝐭', u:'𝐮', v:'𝐯', w:'𝐰', x:'𝐱', y:'𝐲', z:'𝐳', A:'𝐀', B:'𝐁', C:'𝐂', D:'𝐃', E:'𝐄', F:'𝐅', G:'𝐆', H:'𝐇', I:'𝐈', J:'𝐉', K:'𝐊', L:'𝐋', M:'𝐌', N:'𝐍', O:'𝐎', P:'𝐏', Q:'𝐐', R:'𝐑', S:'𝐒', T:'𝐓', U:'𝐔', V:'𝐕', W:'𝐖', X:'𝐗', Y:'𝐘', Z:'𝐙' },
         sansBold: { a:'𝗮', b:'𝗯', c:'𝗰', d:'𝗱', e:'𝗲', f:'𝗳', g:'𝗴', h:'𝗵', i:'𝗶', j:'𝗷', k:'𝗸', l:'𝗹', m:'𝗺', n:'𝗻', o:'𝗼', p:'𝗽', q:'𝗾', r:'𝗿', s:'𝘀', t:'𝘁', u:'𝘂', v:'𝘃', w:'𝘄', x:'𝘅', y:'𝘆', z:'𝘇', A:'𝗔', B:'𝗕', C:'𝗖', D:'𝗗', E:'𝗘', F:'𝗙', G:'𝗚', H:'𝗛', I:'𝗜', J:'𝗝', K:'𝗞', L:'𝗟', M:'𝗠', N:'𝗡', O:'𝗢', P:'𝗣', Q:'𝗤', R:'𝗥', S:'𝗦', T:'𝗧', U:'𝗨', V:'𝗩', W:'𝗪', X:'𝗫', Y:'𝗬', Z:'𝗭' },
@@ -288,6 +410,16 @@
         wavy: { a:'α', b:'в', c:'¢', d:'∂', e:'є', f:'ƒ', g:'g', h:'н', i:'ι', j:'נ', k:'к', l:'ℓ', m:'м', n:'и', o:'σ', p:'ρ', q:'q', r:'я', s:'ѕ', t:'т', u:'υ', v:'ν', w:'ω', x:'χ', y:'у', z:'z' }
     };
 
+    // REGRAS DINÂMICAS PARA CADA CARGO
+    const rolesRulesDict = {
+        'SEGURANÇA': "Sua missão é manter a ordem. Não abuse do poder, aja com imparcialidade e reporte atividades suspeitas ou desrespeito imediatamente à supervisão.",
+        'RECRUTADOR': "Seja proativo e cortês. Traga novos membros que agreguem valor à família, avaliando sempre o perfil comportamental antes de efetuar o convite.",
+        'CARISMA': "Você é a alma da festa! Interaja, puxe assunto e faça todos os membros e visitantes se sentirem bem-vindos. Mantenha a energia sempre em alta.",
+        'DIVULGADOR': "Espalhe a palavra! Compartilhe nossos eventos e recrutamentos nos canais e redes adequadas de forma profissional, sem praticar spam excessivo.",
+        'MODERADOR DE SALAS': "Mantenha o ambiente limpo e respeitoso nas chamadas/chats. Medie conflitos com calma e acione a Segurança apenas quando a ordem for quebrada.",
+        'ADMIN. DE PARCERIAS': "Você não deve fazer parcerias com famílias que têm tretas com outras famílias que já temos parceria. Respeite os limites diplomáticos e mantenha boas relações."
+    };
+
     function transformText(text, style) {
         if (style === 'normal') return text;
         const map = charMaps[style];
@@ -300,7 +432,6 @@
         const fontStyle = document.getElementById('fontSelect').value;
         const stylizedName = transformText(rawName, fontStyle);
         
-        // Aplica na TAG Exata
         document.getElementById('tagMobile').innerText = `👑᭄͢🥃 𝆺𝅥⃝ ${stylizedName} 💉⚑⃟ MB ≛͜͡࿐`;
         document.getElementById('tagPC').innerText = `👑᭄͢🥃 𝆺𝅥⃝ ${stylizedName} 💉🏴‍☠️⃟ PC ≛͜͡࿐`;
     }
@@ -314,17 +445,19 @@
         document.execCommand('copy');
         document.body.removeChild(el);
         
-        const btn = event.target;
-        const oldText = btn.innerText;
-        btn.innerText = "COPIADO!";
+        const btn = event.target.closest('.copy-btn');
+        const oldHTML = btn.innerHTML;
+        btn.innerHTML = "<i class='fas fa-check'></i> COPIADO!";
         btn.style.background = "#00ff40";
+        btn.style.color = "#000";
         setTimeout(() => {
-            btn.innerText = oldText;
+            btn.innerHTML = oldHTML;
             btn.style.background = "var(--accent)";
-        }, 1000);
+            btn.style.color = "#fff";
+        }, 1500);
     }
 
-    // Restante das funções originais
+    // Scroll Reveal
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
         reveals.forEach(r => { if (r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add("active"); });
@@ -333,17 +466,38 @@
     window.onload = () => { reveal(); updateTags(); };
 
     let selectedRole = "";
+
     function pickRole(el, role) {
+        // Remove active class from all
         document.querySelectorAll('.spec-item').forEach(i => i.classList.remove('active'));
+        
+        // Add active to selected
         el.classList.add('active');
         selectedRole = role;
+
+        // Display Alert Box with Animation
+        const alertBox = document.getElementById('roleAlertBox');
+        const alertText = document.getElementById('roleAlertText');
+        
+        alertBox.classList.remove('show');
+        
+        // Pequeno timeout para resetar a animação
+        setTimeout(() => {
+            alertText.innerText = rolesRulesDict[role];
+            alertBox.classList.add('show');
+        }, 50);
     }
 
     function toggleMusic() {
         const audio = document.getElementById('myAudio');
         const icon = document.getElementById('playIcon');
-        if (audio.paused) { audio.play(); icon.className = "fas fa-pause"; }
-        else { audio.pause(); icon.className = "fas fa-play"; }
+        if (audio.paused) { 
+            audio.play(); 
+            icon.className = "fas fa-pause"; 
+        } else { 
+            audio.pause(); 
+            icon.className = "fas fa-play"; 
+        }
     }
 
     async function sendToDiscord() {
@@ -351,26 +505,49 @@
         const age = document.getElementById('f_age').value;
         const nick = document.getElementById('f_nick').value;
         const btn = document.getElementById('submitBtn');
-        if (!nick || !selectedRole) return;
+        
+        if (!nick || !selectedRole || !callname) {
+            alert("Por favor, preencha nome, nick e escolha uma especialidade.");
+            return;
+        }
 
         const data = {
             embeds: [{
                 title: "🚨 NOVO ALISTAMENTO DETECTADO",
                 color: 16711740,
                 fields: [
-                    { name: "👤 NOME", value: callname, inline: true },
-                    { name: "🎂 IDADE", value: age, inline: true },
-                    { name: "🆔 NICK", value: nick, inline: true },
-                    { name: "⚔️ CARGO", value: selectedRole, inline: true }
-                ]
+                    { name: "👤 NOME/APELIDO", value: callname, inline: true },
+                    { name: "🎂 IDADE", value: age || "Não informada", inline: true },
+                    { name: "🆔 NICK/ID HAGO", value: nick, inline: true },
+                    { name: "⚔️ CARGO DESEJADO", value: selectedRole, inline: false }
+                ],
+                footer: { text: "Sistema de Transmissão Automática D-LUX" }
             }]
         };
 
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> TRANSMITINDO...";
+
         try {
-            await fetch(DISCORD_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
-            btn.innerText = "ENVIADO!";
-        } catch (e) { btn.innerText = "ERRO!"; }
+            await fetch(DISCORD_WEBHOOK_URL, { 
+                method: "POST", 
+                headers: { "Content-Type": "application/json" }, 
+                body: JSON.stringify(data) 
+            });
+            btn.innerHTML = "<i class='fas fa-check-circle'></i> DADOS ENVIADOS!";
+            btn.style.background = "#00ff40";
+            btn.style.color = "#000";
+        } catch (e) { 
+            btn.innerHTML = "<i class='fas fa-times-circle'></i> ERRO NA TRANSMISSÃO!";
+        }
+
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = "var(--accent)";
+            btn.style.color = "#fff";
+        }, 3000);
     }
 </script>
 </body>
 </html>
+
