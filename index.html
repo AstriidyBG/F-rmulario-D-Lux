@@ -61,162 +61,94 @@
             100% { top: 110%; }
         }
 
-        /* Scanner Line */
         .scanner-line {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            box-shadow: 0 0 15px var(--accent);
-            z-index: 5;
-            left: 0;
-            pointer-events: none;
-            opacity: 0.3;
+            position: absolute; width: 100%; height: 2px;
+            background: var(--accent); box-shadow: 0 0 15px var(--accent);
+            z-index: 5; left: 0; pointer-events: none; opacity: 0.3;
             animation: scanner 3s linear infinite;
         }
 
         /* Player */
         .music-player-card {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #000;
-            border: 2px solid var(--accent);
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 2000;
-            box-shadow: 5px 5px 0px var(--accent);
+            position: fixed; bottom: 20px; right: 20px;
+            background: #000; border: 2px solid var(--accent);
+            padding: 12px; display: flex; align-items: center; gap: 12px;
+            z-index: 2000; box-shadow: 5px 5px 0px var(--accent);
             animation: border-glow 3s infinite;
         }
 
         .play-btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            animation: pulse-red 2s infinite;
+            background: var(--accent); color: white; border: none;
+            width: 40px; height: 40px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; animation: pulse-red 2s infinite;
         }
 
         /* Layout */
         .header-profile {
-            width: 95%;
-            max-width: 600px;
-            background: #000;
-            margin: 40px auto;
-            border: 1px solid #222;
-            position: relative;
-            overflow: hidden;
+            width: 95%; max-width: 600px; background: #000;
+            margin: 40px auto; border: 1px solid #222;
+            position: relative; overflow: hidden;
             box-shadow: 10px 10px 0px rgba(255, 0, 60, 0.1);
         }
 
         .avatar-box {
-            width: 100px;
-            height: 100px;
-            border: 3px solid var(--accent);
-            background: #000;
-            overflow: hidden;
-            box-shadow: 5px 5px 0px var(--accent);
-            z-index: 10;
-            position: relative;
+            width: 100px; height: 100px; border: 3px solid var(--accent);
+            background: #000; overflow: hidden; box-shadow: 5px 5px 0px var(--accent);
+            z-index: 10; position: relative;
         }
 
         .profile-info h1 {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 2.5rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-top: 10px;
+            font-family: 'Permanent Marker', cursive; font-size: 2.5rem;
+            color: var(--accent); text-transform: uppercase; margin-top: 10px;
         }
 
         .spec-item {
-            border: 1px solid #333;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            font-size: 0.8rem;
-            text-transform: uppercase;
+            border: 1px solid #333; padding: 12px; text-align: center;
+            cursor: pointer; font-weight: bold; transition: 0.3s;
+            font-size: 0.8rem; text-transform: uppercase;
         }
 
-        .spec-item.active {
-            background: var(--accent);
-            color: #fff;
-            border-color: #fff;
-        }
+        .spec-item.active { background: var(--accent); color: #fff; border-color: #fff; }
 
         .submit-btn {
-            width: 100%;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            padding: 18px;
-            font-family: 'Permanent Marker', cursive;
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: 0.3s;
+            width: 100%; background: var(--accent); color: #fff; border: none;
+            padding: 18px; font-family: 'Permanent Marker', cursive;
+            font-size: 1.5rem; cursor: pointer; margin-top: 20px; transition: 0.3s;
         }
 
-        .submit-btn:hover {
-            filter: brightness(1.2);
-            transform: translateY(-2px);
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        input, textarea, select {
+            width: 100%; background: #0a0a0a; border: 1px solid #333; 
+            padding: 12px; color: #fff; outline: none;
+            font-family: 'Rajdhani', sans-serif; margin-top: 5px;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        input, textarea {
-            width: 100%; 
-            background: #0a0a0a; 
-            border: 1px solid #333; 
-            padding: 12px; 
-            color: #fff;
-            outline: none;
-            font-family: 'Rajdhani', sans-serif;
-            margin-top: 5px;
-        }
-
-        input:focus, textarea:focus {
-            border-color: var(--accent);
-        }
+        input:focus, select:focus { border-color: var(--accent); }
 
         .input-label {
-            color: var(--accent);
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--accent); font-size: 0.75rem; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .input-group {
-            margin-bottom: 18px;
-        }
+        .input-group { margin-bottom: 18px; }
 
         .copy-btn {
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-weight: bold;
+            background: var(--accent); color: #fff; border: none;
+            padding: 10px 15px; cursor: pointer; font-weight: bold;
+            font-family: 'Rajdhani'; transition: 0.2s;
         }
+
+        .copy-btn:hover { filter: brightness(1.2); }
+
+        .tag-display-box {
+            display: flex; justify-content: space-between; align-items: center; 
+            background: #050505; padding: 15px; border: 1px solid #222; margin-top: 8px;
+        }
+
+        .tag-text { font-size: 0.9rem; letter-spacing: 1px; color: #eee; word-break: break-all; padding-right: 10px; }
 
     </style>
 </head>
@@ -254,17 +186,37 @@
     <!-- TAGS -->
     <div class="reveal">
         <h2 style="color: var(--accent); font-family: 'Permanent Marker'; margin-bottom: 15px;">GERADOR DE IDENTIDADE</h2>
-        <div style="background: #111; padding: 20px; border: 1px dashed var(--accent); margin-bottom: 40px;">
+        <div style="background: #111; padding: 25px; border: 1px dashed var(--accent); margin-bottom: 40px; box-shadow: 0 0 20px rgba(255,0,0,0.05);">
+            
             <div class="input-group">
-                <span class="input-label">NOME PARA TAG</span>
-                <input type="text" id="tagName" placeholder="Insira seu nome..." oninput="updateTags()">
+                <span class="input-label">NICKNAME (SEU NOME)</span>
+                <input type="text" id="tagName" placeholder="Digite seu nome aqui..." oninput="updateTags()">
+            </div>
+
+            <div class="input-group">
+                <span class="input-label">ESTILO DA FONTE</span>
+                <select id="fontSelect" onchange="updateTags()">
+                    <option value="normal">PADRÃO</option>
+                    <option value="serifBold">𝐒𝐞𝐫𝐢𝐟 𝐁𝐨𝐥𝐝</option>
+                    <option value="sansBold">𝗦𝗮𝗻𝘀 𝗕𝗼𝗹𝗱</option>
+                    <option value="boldItalic">𝑩𝒐𝒍𝒅 𝑰𝒕𝒂𝒍𝒊𝒄</option>
+                    <option value="boldScript">𝓒𝓪𝓵𝓵𝓲𝓰𝓻𝓪𝓹𝓱𝔂 𝓑𝓸𝓵𝓭</option>
+                    <option value="boldFraktur">𝕭𝖔𝖑𝖉 𝕱𝖗𝖆𝖐𝖙𝖚𝖗</option>
+                    <option value="sansBoldItalic">𝘽𝙤𝙡𝙙 𝙄𝙩𝙖𝙡𝙞𝙘 𝙎𝙖𝙣𝙨</option>
+                    <option value="monospace">𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎</option>
+                    <option value="cyber">₵¥฿ɆⱤ</option>
+                    <option value="l33t">L33T 57YL3</option>
+                    <option value="vaporwave">Ｖａｐｏｒｗａｖｅ</option>
+                    <option value="smallCaps">ꜱᴍᴀʟʟ ᴄᴀᴘꜱ</option>
+                    <option value="wavy">уσυя тєχт</option>
+                </select>
             </div>
             
             <!-- MOBILE -->
-            <div style="margin-top: 15px;">
+            <div style="margin-top: 20px;">
                 <span class="input-label" style="font-size: 0.6rem; color: #888;">VERSÃO MOBILE (CELULAR)</span>
-                <div style="display: flex; justify-content: space-between; align-items: center; background: #050505; padding: 12px; border: 1px solid #222; margin-top: 5px;">
-                    <span id="tagMobile" style="font-size: 0.8rem;">᭄͢🍸 𝆺𝅥⃝ [NOME]-💉⚑⃟ MB ≛͜͡࿐</span>
+                <div class="tag-display-box">
+                    <span id="tagMobile" class="tag-text">👑᭄͢🥃 𝆺𝅥⃝ [NOME] 💉⚑⃟ MB ≛͜͡࿐</span>
                     <button class="copy-btn" onclick="copyTag('tagMobile')">COPIAR</button>
                 </div>
             </div>
@@ -272,8 +224,8 @@
             <!-- PC -->
             <div style="margin-top: 15px;">
                 <span class="input-label" style="font-size: 0.6rem; color: #888;">VERSÃO PC (COMPUTADOR)</span>
-                <div style="display: flex; justify-content: space-between; align-items: center; background: #050505; padding: 12px; border: 1px solid #222; margin-top: 5px;">
-                    <span id="tagPC" style="font-size: 0.8rem;">᭄͢🍸 𝆺𝅥⃝[NOME]⍟-💉🏴‍☠️⃟ PC ≛͜͡࿐</span>
+                <div class="tag-display-box">
+                    <span id="tagPC" class="tag-text">👑᭄͢🥃 𝆺𝅥⃝ [NOME] 💉🏴‍☠️⃟ PC ≛͜͡࿐</span>
                     <button class="copy-btn" onclick="copyTag('tagPC')">COPIAR</button>
                 </div>
             </div>
@@ -286,25 +238,21 @@
         <div style="background: #000; border: 1px solid #222; padding: 30px; margin-bottom: 60px; position: relative;">
             <div class="scanner-line"></div>
 
-            <!-- Pergunta 1 -->
             <div class="input-group">
-                <label class="input-label">Nome ou Apelido (Como prefere ser chamado?)</label>
-                <input type="text" id="f_callname" placeholder="Ex: Bolt / Ricardo">
+                <label class="input-label">Nome ou Apelido</label>
+                <input type="text" id="f_callname" placeholder="Ex: Bolt">
             </div>
 
-            <!-- Pergunta 2 -->
             <div class="input-group">
                 <label class="input-label">Idade Atual</label>
                 <input type="number" id="f_age" placeholder="Sua idade">
             </div>
 
-            <!-- Pergunta 3 -->
             <div class="input-group">
                 <label class="input-label">Nick no Hago / ID</label>
                 <input type="text" id="f_nick" placeholder="Seu nick oficial">
             </div>
 
-            <!-- Pergunta 4 (Seleção de Especialidades Atualizada) -->
             <div class="input-group">
                 <label class="input-label">Especialidade Desejada</label>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px;">
@@ -316,20 +264,7 @@
                 </div>
             </div>
 
-            <!-- Pergunta 5 -->
-            <div class="input-group">
-                <label class="input-label">Qual o seu objetivo na família?</label>
-                <textarea id="f_goal" rows="2" placeholder="O que você veio fazer na D-LUX?"></textarea>
-            </div>
-
-            <!-- Pergunta 6 -->
-            <div class="input-group">
-                <label class="input-label">O que te diferencia dos outros membros?</label>
-                <textarea id="f_diff" rows="2" placeholder="Por que devemos escolher você?"></textarea>
-            </div>
-
             <button class="submit-btn" id="submitBtn" onclick="sendToDiscord()">TRANSMITIR DADOS</button>
-            <p class="discord-note">CONEXÃO DIRETA COM A CENTRAL D-LUX NO DISCORD</p>
         </div>
     </div>
 </div>
@@ -337,34 +272,71 @@
 <script>
     const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1473067070164959546/w9j63fmXdRzbhuoQYS0nRMmUAqkmPFForLBJr2doZax11NRyF4JzommKhpgYi2y6HkYQ";
 
+    // MAPAS DE CARACTERES
+    const charMaps = {
+        serifBold: { a:'𝐚', b:'𝐛', c:'𝐜', d:'𝐝', e:'𝐞', f:'𝐟', g:'𝐠', h:'𝐡', i:'𝐢', j:'𝐣', k:'𝐤', l:'𝐥', m:'𝐦', n:'𝐧', o:'𝐨', p:'𝐩', q:'𝐪', r:'𝐫', s:'𝐬', t:'𝐭', u:'𝐮', v:'𝐯', w:'𝐰', x:'𝐱', y:'𝐲', z:'𝐳', A:'𝐀', B:'𝐁', C:'𝐂', D:'𝐃', E:'𝐄', F:'𝐅', G:'𝐆', H:'𝐇', I:'𝐈', J:'𝐉', K:'𝐊', L:'𝐋', M:'𝐌', N:'𝐍', O:'𝐎', P:'𝐏', Q:'𝐐', R:'𝐑', S:'𝐒', T:'𝐓', U:'𝐔', V:'𝐕', W:'𝐖', X:'𝐗', Y:'𝐘', Z:'𝐙' },
+        sansBold: { a:'𝗮', b:'𝗯', c:'𝗰', d:'𝗱', e:'𝗲', f:'𝗳', g:'𝗴', h:'𝗵', i:'𝗶', j:'𝗷', k:'𝗸', l:'𝗹', m:'𝗺', n:'𝗻', o:'𝗼', p:'𝗽', q:'𝗾', r:'𝗿', s:'𝘀', t:'𝘁', u:'𝘂', v:'𝘃', w:'𝘄', x:'𝘅', y:'𝘆', z:'𝘇', A:'𝗔', B:'𝗕', C:'𝗖', D:'𝗗', E:'𝗘', F:'𝗙', G:'𝗚', H:'𝗛', I:'𝗜', J:'𝗝', K:'𝗞', L:'𝗟', M:'𝗠', N:'𝗡', O:'𝗢', P:'𝗣', Q:'𝗤', R:'𝗥', S:'𝗦', T:'𝗧', U:'𝗨', V:'𝗩', W:'𝗪', X:'𝗫', Y:'𝗬', Z:'𝗭' },
+        boldItalic: { a:'𝒂', b:'𝒃', c:'𝒄', d:'𝒅', e:'𝒆', f:'𝒇', g:'𝒈', h:'𝒉', i:'𝒊', j:'𝒋', k:'𝒌', l:'𝒍', m:'𝒎', n:'𝒏', o:'𝒐', p:'𝒑', q:'𝒒', r:'𝒓', s:'𝒔', t:'𝒕', u:'𝒖', v:'𝒗', w:'𝒘', x:'𝒙', y:'𝒚', z:'𝒛', A:'𝑨', B:'𝑩', C:'𝑪', D:'𝑫', E:'𝑬', F:'𝑭', G:'𝑮', H:'𝑯', I:'𝑰', J:'𝑱', K:'𝑲', L:'𝑳', M:'𝑴', N:'𝑵', O:'𝑶', P:'𝑷', Q:'𝑸', R:'𝑹', S:'𝑺', T:'𝑻', U:'𝑼', V:'𝑽', W:'𝑾', X:'𝑿', Y:'𝒀', Z:'𝒁' },
+        boldScript: { a:'𝓪', b:'𝓫', c:'𝓬', d:'𝓭', e:'𝓮', f:'𝓯', g:'𝓰', h:'𝓱', i:'𝓲', j:'𝓳', k:'𝓴', l:'𝓵', m:'𝓶', n:'𝓷', o:'𝓸', p:'𝓹', q:'𝓺', r:'𝓻', s:'𝓼', t:'𝓽', u:'𝓾', v:'𝓿', w:'𝔀', x:'𝔁', y:'𝔂', z:'𝔃', A:'𝓐', B:'𝓑', C:'𝓒', D:'𝓓', E:'𝓔', F:'𝓕', G:'𝓖', H:'𝓗', I:'𝓘', J:'𝓙', K:'𝓚', L:'𝓛', M:'𝓜', N:'𝓝', O:'𝓞', P:'𝓟', Q:'𝓠', R:'𝓡', S:'𝓢', T:'𝓣', U:'𝓤', V:'𝓥', W:'𝓦', X:'𝓧', Y:'𝓨', Z:'𝓩' },
+        boldFraktur: { a:'𝖆', b:'𝖇', c:'𝖈', d:'𝖉', e:'𝖊', f:'𝖋', g:'𝖌', h:'𝖍', i:'𝖎', j:'𝖏', k:'𝖐', l:'𝖑', m:'𝖒', n:'𝖓', o:'𝖔', p:'𝖕', q:'𝖖', r:'𝖗', s:'𝖘', t:'𝖙', u:'𝖚', v:'𝖛', w:'𝖜', x:'𝖝', y:'𝖞', z:'𝖟', A:'𝕬', B:'𝕭', C:'𝕮', D:'𝕯', E:'𝕰', F:'𝕱', G:'𝕲', H:'𝕳', I:'𝕴', J:'𝕵', K:'𝕶', L:'𝕷', M:'𝕸', N:'𝕹', O:'𝕺', P:'𝕻', Q:'𝕼', R:'𝕽', S:'𝕾', T:'𝕿', U:'𝕼', V:'𝖁', W:'𝖂', X:'𝖃', Y:'𝖄', Z:'𝖅' },
+        sansBoldItalic: { a:'𝙖', b:'𝙗', c:'𝙘', d:'𝙙', e:'𝙚', f:'𝙛', g:'𝙜', h:'𝙝', i:'𝙞', j:'𝙟', k:'𝙠', l:'𝙡', m:'𝙢', n:'𝙣', o:'𝙤', p:'𝙥', q:'𝙦', r:'𝙧', s:'𝙨', t:'𝙩', u:'𝙪', v:'𝙫', w:'𝙬', x:'𝙭', y:'𝙮', z:'𝙯', A:'𝘼', B:'𝘽', C:'𝘾', D:'𝘿', E:'𝙀', F:'𝙁', G:'𝙂', H:'𝙃', I:'𝙄', J:'𝙅', K:'𝙆', L:'𝙇', M:'𝙈', N:'𝙉', O:'𝙊', P:'𝙋', Q:'𝙌', R:'𝙍', S:'𝙎', T:'𝙏', U:'𝙐', V:'𝙑', W:'𝙒', X:'𝙓', Y:'𝙔', Z:'𝙕' },
+        monospace: { a:'𝚊', b:'𝚋', c:'𝚌', d:'𝚍', e:'𝚎', f:'𝚏', g:'𝚐', h:'𝚑', i:'𝚒', j:'𝚓', k:'𝚔', l:'𝚕', m:'𝚖', n:'𝚗', o:'𝚘', p:'𝚙', q:'𝚚', r:'𝚛', s:'𝚜', t:'𝚝', u:'𝚞', v:'𝚟', w:'𝚠', x:'𝚡', y:'𝚢', z:'𝚣', A:'𝙰', B:'𝙱', C:'𝙲', D:'𝙳', E:'𝙴', F:'𝙵', G:'𝙶', H:'𝙷', I:'𝙸', J:'𝙹', K:'𝙺', L:'𝙻', M:'𝙼', N:'𝙽', O:'𝙾', P:'𝙿', Q:'𝚀', R:'𝚁', S:'𝚂', T:'𝚃', U:'𝚄', V:'𝚅', W:'𝚆', X:'𝚇', Y:'𝚈', Z:'𝚉' },
+        cyber: { a:'₳', b:'฿', c:'₵', d:'Đ', e:'Ɇ', f:'₣', g:'₲', h:'Ħ', i:'Ɨ', j:'Ɉ', k:'₭', l:'Ⱡ', m:'₥', n:'₦', o:'Ø', p:'₱', q:'Ɋ', r:'Ɽ', s:'₴', t:'₮', u:'Ʉ', v:'V', w:'₩', x:'Ӿ', y:'¥', z:'Ƶ', A:'₳', B:'฿', C:'₵', D:'Đ', E:'Ɇ', F:'₣', G:'₲', H:'Ħ', I:'Ɨ', J:'Ɉ', K:'₭', L:'Ⱡ', M:'₥', N:'₦', O:'Ø', P:'₱', Q:'Ɋ', R:'Ɽ', S:'₴', T:'₮', U:'Ʉ', V:'V', W:'₩', X:'Ӿ', Y:'¥', Z:'Ƶ' },
+        l33t: { a:'4', b:'8', c:'(', d:'|)', e:'3', f:'|=', g:'6', h:'|-|', i:'1', j:'_|', k:'|<', l:'|_', m:'|\\/|', n:'|\\|', o:'0', p:'|*', q:'9', r:'|2', s:'5', t:'7', u:'|_|', v:'\\/', w:'\\/\\/', x:'> <', y:'`/', z:'2' },
+        vaporwave: { a:'ａ', b:'ｂ', c:'ｃ', d:'ｄ', e:'ｅ', f:'ｆ', g:'ｇ', h:'ｈ', i:'ｉ', j:'ｊ', k:'ｋ', l:'ｌ', m:'ｍ', n:'ｎ', o:'ｏ', p:'ｐ', q:'ｑ', r:'ｒ', s:'ｓ', t:'ｔ', u:'ｕ', v:'ｖ', w:'ｗ', x:'ｘ', y:'ｙ', z:'ｚ', A:'Ａ', B:'Ｂ', C:'Ｃ', D:'Ｄ', E:'Ｅ', F:'Ｆ', G:'Ｇ', H:'Ｈ', I:'Ｉ', J:'Ｊ', K:'Ｋ', L:'Ｌ', M:'Ｍ', N:'Ｎ', O:'Ｏ', P:'Ｐ', Q:'Ｑ', R:'Ｒ', S:'Ｓ', T:'Ｔ', U:'Ｕ', V:'Ｖ', W:'Ｗ', X:'Ｘ', Y:'Ｙ', Z:'Ｚ' },
+        smallCaps: { a:'ᴀ', b:'ʙ', c:'ᴄ', d:'ᴅ', e:'ᴇ', f:'ꜰ', g:'ɢ', h:'ʜ', i:'ɪ', j:'ᴊ', k:'ᴋ', l:'ʟ', m:'ᴍ', n:'ɴ', o:'ᴏ', p:'ᴘ', q:'ǫ', r:'ʀ', s:'ꜱ', t:'ᴛ', u:'ᴜ', v:'ᴠ', w:'ᴡ', x:'x', y:'ʏ', z:'ᴢ' },
+        wavy: { a:'α', b:'в', c:'¢', d:'∂', e:'є', f:'ƒ', g:'g', h:'н', i:'ι', j:'נ', k:'к', l:'ℓ', m:'м', n:'и', o:'σ', p:'ρ', q:'q', r:'я', s:'ѕ', t:'т', u:'υ', v:'ν', w:'ω', x:'χ', y:'у', z:'z' }
+    };
+
+    function transformText(text, style) {
+        if (style === 'normal') return text;
+        const map = charMaps[style];
+        if (!map) return text;
+        return text.split('').map(char => map[char] || map[char.toLowerCase()] || char).join('');
+    }
+
+    function updateTags() {
+        const rawName = document.getElementById('tagName').value || "NOME";
+        const fontStyle = document.getElementById('fontSelect').value;
+        const stylizedName = transformText(rawName, fontStyle);
+        
+        // Aplica na TAG Exata
+        document.getElementById('tagMobile').innerText = `👑᭄͢🥃 𝆺𝅥⃝ ${stylizedName} 💉⚑⃟ MB ≛͜͡࿐`;
+        document.getElementById('tagPC').innerText = `👑᭄͢🥃 𝆺𝅥⃝ ${stylizedName} 💉🏴‍☠️⃟ PC ≛͜͡࿐`;
+    }
+
+    function copyTag(id) {
+        const text = document.getElementById(id).innerText;
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        
+        const btn = event.target;
+        const oldText = btn.innerText;
+        btn.innerText = "COPIADO!";
+        btn.style.background = "#00ff40";
+        setTimeout(() => {
+            btn.innerText = oldText;
+            btn.style.background = "var(--accent)";
+        }, 1000);
+    }
+
+    // Restante das funções originais
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
-        reveals.forEach(r => {
-            if (r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add("active");
-        });
+        reveals.forEach(r => { if (r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add("active"); });
     }
     window.addEventListener("scroll", reveal);
-    window.onload = reveal;
+    window.onload = () => { reveal(); updateTags(); };
 
     let selectedRole = "";
     function pickRole(el, role) {
         document.querySelectorAll('.spec-item').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
         selectedRole = role;
-    }
-
-    function updateTags() {
-        const name = document.getElementById('tagName').value || "[NOME]";
-        document.getElementById('tagMobile').innerText = `᭄͢🍸 𝆺𝅥⃝ ${name}-💉⚑⃟ MB ≛͜͡࿐`;
-        document.getElementById('tagPC').innerText = `᭄͢🍸 𝆺𝅥⃝${name}⍟-💉🏴‍☠️⃟ PC ≛͜͡࿐`;
-    }
-
-    function copyTag(id) {
-        const text = document.getElementById(id).innerText;
-        navigator.clipboard.writeText(text);
-        const btn = event.target;
-        btn.innerText = "COPIADO";
-        setTimeout(() => btn.innerText = "COPIAR", 1000);
     }
 
     function toggleMusic() {
@@ -378,59 +350,26 @@
         const callname = document.getElementById('f_callname').value;
         const age = document.getElementById('f_age').value;
         const nick = document.getElementById('f_nick').value;
-        const goal = document.getElementById('f_goal').value;
-        const diff = document.getElementById('f_diff').value;
         const btn = document.getElementById('submitBtn');
-
-        if (!nick || !selectedRole || !callname || !age) {
-            btn.innerText = "PREENCHA OS CAMPOS OBRIGATÓRIOS!";
-            setTimeout(() => btn.innerText = "TRANSMITIR DADOS", 2000);
-            return;
-        }
+        if (!nick || !selectedRole) return;
 
         const data = {
-            username: "D-LUX RECRUTAMENTO",
-            avatar_url: "https://i.pinimg.com/736x/92/c5/d8/92c5d80effca7e40f59dbb9ea405cdaf.jpg",
             embeds: [{
                 title: "🚨 NOVO ALISTAMENTO DETECTADO",
                 color: 16711740,
                 fields: [
-                    { name: "👤 NOME/APELIDO", value: callname, inline: true },
+                    { name: "👤 NOME", value: callname, inline: true },
                     { name: "🎂 IDADE", value: age, inline: true },
-                    { name: "🆔 NICK HAGO", value: nick, inline: true },
-                    { name: "⚔️ CARGO", value: selectedRole, inline: true },
-                    { name: "🎯 OBJETIVO", value: goal || "Não informado", inline: false },
-                    { name: "⭐ DIFERENCIAL", value: diff || "Não informado", inline: false }
-                ],
-                footer: { text: "D-LUX ELITE SYSTEM | PROTOCOLO ATUALIZADO" },
-                timestamp: new Date()
+                    { name: "🆔 NICK", value: nick, inline: true },
+                    { name: "⚔️ CARGO", value: selectedRole, inline: true }
+                ]
             }]
         };
 
-        btn.innerText = "ENVIANDO...";
-        btn.disabled = true;
-
         try {
-            const response = await fetch(DISCORD_WEBHOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
-            if (response.ok) {
-                btn.innerText = "ENVIADO COM SUCESSO!";
-                btn.style.background = "#00ff40";
-            } else {
-                throw new Error();
-            }
-        } catch (e) {
-            btn.innerText = "ERRO NO SINAL!";
-            btn.disabled = false;
-            btn.style.background = "#333";
-            setTimeout(() => {
-                btn.innerText = "TRANSMITIR DADOS";
-                btn.style.background = "var(--accent)";
-            }, 3000);
-        }
+            await fetch(DISCORD_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+            btn.innerText = "ENVIADO!";
+        } catch (e) { btn.innerText = "ERRO!"; }
     }
 </script>
 </body>
