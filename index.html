@@ -383,6 +383,12 @@
                 <input type="text" id="f_nick" placeholder="Seu nick oficial">
             </div>
 
+            <!-- NOVO CAMPO: FAMÍLIAS ANTERIORES -->
+            <div class="input-group">
+                <label class="input-label"><i class="fas fa-users"></i> Famílias Anteriores</label>
+                <input type="text" id="f_history" placeholder="Em quais famílias já esteve?">
+            </div>
+
             <div class="input-group">
                 <label class="input-label"><i class="fas fa-crosshairs"></i> Especialidade Desejada</label>
                 
@@ -431,15 +437,15 @@
     const charMaps = {
         serifBold: { a:'𝐚', b:'𝐛', c:'𝐜', d:'𝐝', e:'𝐞', f:'𝐟', g:'𝐠', h:'𝐡', i:'𝐢', j:'𝐣', k:'𝐤', l:'𝐥', m:'𝐦', n:'𝐧', o:'𝐨', p:'𝐩', q:'𝐪', r:'𝐫', s:'𝐬', t:'𝐭', u:'𝐮', v:'𝐯', w:'𝐰', x:'𝐱', y:'𝐲', z:'𝐳', A:'𝐀', B:'𝐁', C:'𝐂', D:'𝐃', E:'𝐄', F:'𝐅', G:'𝐆', H:'𝐇', I:'𝐈', J:'𝐉', K:'𝐊', L:'𝐋', M:'𝐌', N:'𝐍', O:'𝐎', P:'𝐏', Q:'𝐐', R:'𝐑', S:'𝐒', T:'𝐓', U:'𝐔', V:'𝐕', W:'𝐖', X:'𝐗', Y:'𝐘', Z:'𝐙' },
         sansBold: { a:'𝗮', b:'𝗯', c:'𝗰', d:'𝗱', e:'𝗲', f:'𝗳', g:'𝗴', h:'𝗵', i:'𝗶', j:'𝗷', k:'𝗸', l:'𝗹', m:'𝗺', n:'𝗻', o:'𝗼', p:'𝗽', q:'𝗾', r:'𝗿', s:'𝘀', t:'𝘁', u:'𝘂', v:'𝘃', w:'𝘄', x:'𝘅', y:'𝘆', z:'𝘇', A:'𝗔', B:'𝗕', C:'𝗖', D:'𝗗', E:'𝗘', F:'𝗙', G:'𝗚', H:'𝗛', I:'𝗜', J:'𝗝', K:'𝗞', L:'𝗟', M:'𝗠', N:'𝗡', O:'𝗢', P:'𝗣', Q:'𝗤', R:'𝗥', S:'𝗦', T:'𝗧', U:'𝗨', V:'𝗩', W:'𝗪', X:'𝗫', Y:'𝗬', Z:'𝗭' },
-        boldItalic: { a:'𝒂', b:'𝒃', c:'𝒄', d:'𝒅', e:'𝒆', f:'𝒇', g:'𝒈', h:'𝒉', i:'𝒊', j:'𝒋', k:'𝒌', l:'𝒍', m:'𝒎', n:'𝒏', o:'𝒐', p:'𝒑', q:'𝒒', r:'𝒓', s:'𝒔', t:'𝒕', u:'𝒖', v:'𝒗', w:'𝒘', x:'𝒙', y:'𝒚', z:'𝒛', A:'𝑨', B:'𝑩', C:'𝑪', D:'𝑫', E:'𝑬', F:'𝑭', G:'𝑮', H:'𝑯', I:'𝑰', J:'𝑱', K:'𝑲', L:'𝑳', M:'𝑴', N:'𝑵', O:'𝑶', P:'𝑷', Q:'𝒬', R:'𝑹', S:'𝑺', T:'𝑻', U:'𝑼', V:'𝑽', W:'𝑾', X:'𝑿', Y:'𝒀', Z:'𝒁' },
+        boldItalic: { a:'𝒂', b:'𝒃', c:'𝒄', d:'𝒅', e:'𝒆', f:'𝒇', g:'𝒈', h:'𝒉', i:'𝒊', j:'𝒋', k:'𝒌', l:'𝒍', m:'𝒎', n:'𝒏', o:'𝒐', p:'𝒑', q:'', r:'𝒓', s:'𝒔', t:'𝒕', u:'𝒖', v:'𝒗', w:'𝒘', x:'𝒙', y:'𝒚', z:'𝒛', A:'𝑨', B:'𝑩', C:'𝑪', D:'𝑫', E:'𝑬', F:'𝑭', G:'𝑮', H:'𝑯', I:'𝑰', J:'𝑱', K:'𝑲', L:'𝑳', M:'𝑴', N:'𝑵', O:'𝑶', P:'𝑷', Q:'𝒬', R:'𝑹', S:'𝑺', T:'𝑻', U:'𝑼', V:'𝑽', W:'𝑾', X:'𝑿', Y:'𝒀', Z:'𝒁' },
         boldScript: { a:'𝓪', b:'𝓫', c:'𝓬', d:'𝓭', e:'𝓮', f:'𝓯', g:'𝓰', h:'𝓱', i:'𝓲', j:'𝓳', k:'𝓴', l:'𝓵', m:'𝓶', n:'𝓷', o:'𝓸', p:'𝓹', q:'𝓺', r:'𝓻', s:'𝓼', t:'𝓽', u:'𝓾', v:'𝓿', w:'𝔀', x:'𝔁', y:'𝔂', z:'𝔃', A:'𝓐', B:'𝓑', C:'𝓒', D:'𝓓', E:'𝓔', F:'𝓕', G:'𝓖', H:'𝓗', I:'𝓘', J:'𝓙', K:'𝓚', L:'𝓛', M:'𝓜', N:'𝓝', O:'𝓞', P:'𝓟', Q:'𝓠', R:'𝓡', S:'𝓢', T:'𝓣', U:'𝓤', V:'𝓥', W:'𝓦', X:'𝓧', Y:'𝓨', Z:'𝓩' },
         boldFraktur: { a:'𝖆', b:'𝖇', c:'𝖈', d:'𝖉', e:'𝖊', f:'𝖋', g:'𝖌', h:'𝖍', i:'𝖎', j:'𝖏', k:'𝖐', l:'𝖑', m:'𝖒', n:'𝖓', o:'𝖔', p:'𝖕', q:'𝖖', r:'𝖗', s:'𝖘', t:'𝖙', u:'𝖚', v:'𝖛', w:'𝖜', x:'𝖝', y:'𝖞', z:'𝖟', A:'𝕬', B:'𝕭', C:'𝕮', D:'𝕯', E:'𝕰', F:'𝕱', G:'𝕲', H:'𝕳', I:'𝕴', J:'𝕵', K:'𝕶', L:'𝕷', M:'𝕸', N:'𝕹', O:'𝕺', P:'𝕻', Q:'𝕼', R:'𝕽', S:'𝕾', T:'𝕿', U:'𝕼', V:'𝖁', W:'𝖂', X:'𝖃', Y:'𝖄', Z:'𝖅' },
         sansBoldItalic: { a:'𝙖', b:'𝙗', c:'𝙘', d:'𝙙', e:'𝙚', f:'𝙛', g:'𝙜', h:'𝙝', i:'𝙞', j:'', k:'𝙠', l:'𝙡', m:'𝙢', n:'𝙣', o:'𝙤', p:'𝙥', q:'𝙦', r:'𝙧', s:'𝙨', t:'𝙩', u:'𝙪', v:'𝙫', w:'𝙬', x:'𝙭', y:'𝙮', z:'𝙯', A:'𝘼', B:'𝘽', C:'𝘾', D:'𝘿', E:'𝙀', F:'𝙁', G:'𝙂', H:'𝙃', I:'𝙄', J:'', K:'𝙠', L:'𝙡', M:'𝙈', N:'𝙉', O:'𝙊', P:'𝙋', Q:'𝙌', R:'𝙍', S:'𝙎', T:'𝙏', U:'𝙐', V:'𝙑', W:'𝙒', X:'𝙓', Y:'𝙔', Z:'𝙕' },
-        monospace: { a:'𝚊', b:'𝚋', c:'𝚌', d:'𝚍', e:'𝚎', f:'𝚏', g:'𝚐', h:'𝚑', i:'𝚒', j:'𝚓', k:'𝚔', l:'𝚕', m:'𝚖', n:'𝚗', o:'𝚘', p:'𝚙', q:'𝚚', r:'𝚛', s:'𝚜', t:'𝚝', u:'𝚞', v:'𝚟', w:'𝚠', x:'𝚡', y:'𝚢', z:'𝚣', A:'𝙰', B:'𝙱', C:'𝙲', D:'𝙳', E:'𝙴', F:'𝙵', G:'𝙶', H:'𝙷', I:'𝙸', J:'𝙹', K:'𝙺', L:'𝙻', M:'𝙼', N:'𝙽', O:'𝙾', P:'𝙿', Q:'𝚀', R:'𝚁', S:'𝚂', T:'𝚃', U:'𝚄', V:'Ｖ', W:'Ｗ', X:'Ｘ', Y:'Ｙ', Z:'Ｚ' },
+        monospace: { a:'𝚊', b:'𝚋', c:'𝚌', d:'𝚍', e:'𝚎', f:'𝚏', g:'𝚐', h:'𝚑', i:'𝚒', j:'𝚓', k:'𝚔', l:'𝚕', m:'𝚖', n:'𝚗', o:'𝚘', p:'𝚙', q:'', r:'𝚛', s:'𝚜', t:'𝚝', u:'𝚞', v:'𝚟', w:'𝚠', x:'𝚡', y:'𝚢', z:'𝚣', A:'𝙰', B:'𝙱', C:'𝙲', D:'𝙳', E:'𝙴', F:'𝙵', G:'𝙶', H:'𝙷', I:'𝙸', J:'𝙹', K:'𝙺', L:'𝙻', M:'𝙼', N:'𝙽', O:'𝙾', P:'𝙿', Q:'', R:'𝚁', S:'𝚂', T:'𝚃', U:'𝚄', V:'Ｖ', W:'Ｗ', X:'Ｘ', Y:'Ｙ', Z:'Ｚ' },
         cyber: { a:'₳', b:'฿', c:'₵', d:'Đ', e:'Ɇ', f:'₣', g:'₲', h:'Ħ', i:'Ɨ', j:'Ɉ', k:'₭', l:'Ⱡ', m:'₥', n:'₦', o:'Ø', p:'₱', q:'Ɋ', r:'Ɽ', s:'₴', t:'₮', u:'Ʉ', v:'V', w:'₩', x:'Ӿ', y:'¥', z:'Ƶ', A:'₳', B:'฿', C:'₵', D:'Đ', E:'Ɇ', F:'₣', G:'₲', H:'Ħ', I:'Ɨ', J:'Ɉ', K:'₭', L:'Ⱡ', M:'₥', N:'₦', O:'Ø', P:'₱', Q:'Ɋ', R:'Ɽ', S:'₴', T:'₮', U:'Ʉ', V:'V', W:'₩', X:'Ӿ', Y:'¥', Z:'Ƶ' },
         l33t: { a:'4', b:'8', c:'(', d:'|)', e:'3', f:'|=', g:'6', h:'|-|', i:'1', j:'_|', k:'|<', l:'|_', m:'|\\/|', n:'|\\|', o:'0', p:'|*', q:'9', r:'|2', s:'5', t:'7', u:'|_|', v:'\\/', w:'\\/\\/', x:'> <', y:'`/', z:'2' },
-        vaporwave: { a:'ａ', b:'ｂ', c:'ｃ', d:'ｄ', e:'ｅ', f:'ｆ', g:'ｇ', h:'ｈ', i:'ｉ', j:'ｊ', k:'ｋ', l:'ｌ', m:'ｍ', n:'ｎ', o:'ｏ', p:'ｐ', q:'ｑ', r:'ｒ', s:'ｓ', t:'ｔ', u:'ｕ', v:'ｖ', w:'ｗ', x:'ｘ', y:'ｙ', z:'ｚ', A:'Ａ', B:'Ｂ', C:'Ｃ', D:'Ｄ', E:'Ｅ', F:'Ｆ', G:'Ｇ', H:'Ｈ', I:'Ｉ', J:'Ｊ', K:'Ｋ', L:'Ｌ', M:'Ｍ', N:'Ｎ', O:'Ｏ', P:'Ｐ', Q:'Ｑ', R:'Ｒ', S:'Ｓ', T:'Ｔ', U:'Ｕ', V:'Ｖ', W:'Ｗ', X:'Ｘ', Y:'Ｙ', Z:'Ｚ' },
-        smallCaps: { a:'ᴀ', b:'ʙ', c:'ᴄ', d:'ᴅ', e:'ᴇ', f:'ꜰ', g:'ɢ', h:'ʜ', i:'ɪ', j:'ᴊ', k:'ᴋ', l:'ʟ', m:'ᴍ', n:'ɴ', o:'ᴏ', p:'ᴘ', q:'ǫ', r:'ʀ', s:'ꜱ', t:'ᴛ', u:'ᴜ', v:'ᴠ', w:'ᴡ', x:'x', y:'ʏ', z:'ᴢ', A:'ᴀ', B:'ʙ', C:'ᴄ', D:'ᴅ', E:'ᴇ', F:'ꜰ', G:'ɢ', H:'ʜ', I:'ɪ', J:'ᴊ', K:'ᴋ', L:'ʟ', M:'ᴍ', N:'ɴ', O:'ᴏ', P:'ᴘ', Q:'ǫ', R:'ʀ', S:'ꜱ', T:'ᴛ', U:'ᴜ', V:'ᴠ', W:'ᴡ', X:'x', Y:'ʏ', Z:'ᴢ' },
+        vaporwave: { a:'ａ', b:'ｂ', c:'ｃ', d:'ｄ', e:'ｅ', f:'ｆ', g:'ｇ', h:'ｈ', i:'ｉ', j:'ｊ', k:'ｋ', l:'ｌ', m:'ｍ', n:'ｎ', o:'ｏ', p:'ｐ', q:'ｑ', r:'ｒ', s:'ｓ', t:'ｔ', u:'ｕ', v:'ｖ', w:'ｗ', x:'ｘ', y:'ｙ', z:'ｚ', A:'Ａ', B:'Ｂ', C:'Ｃ', D:'Ｄ', E:'Ｅ', F:'Ｆ', G:'Ｇ', H:'Ｈ', I:'Ｉ', J:'Ｊ', K:'Ｋ', L:'Ｌ', M:'Ｍ', N:'Ｎ', O:'Ｏ', P:'Ｐ', Q:'Ｑ', R:'Ｒ', S:'Ｓ', T:'Ｔ', U:'Ｕ', V:'Ｖ', W:'Ｗ', X:'Ａ', Y:'Ｙ', Z:'Ｚ' },
+        smallCaps: { a:'ᴀ', b:'ʙ', c:'ᴄ', d:'ᴅ', e:'ᴇ', f:'ꜰ', g:'ɢ', h:'ʜ', i:'ɪ', j:'ᴊ', k:'ᴋ', l:'ʟ', m:'ᴍ', n:'ɴ', o:'ᴏ', p:'ᴘ', q:'ǫ', r:'ʀ', s:'ꜱ', t:'ᴛ', u:'ᴜ', v:'ᴠ', w:'ᴡ', x:'x', y:'ʏ', z:'ᴢ', A:'ᴀ', B:'ʙ', C:'ᴄ', D:'ᴅ', E:'ᴇ', F:'ꜰ', G:'ɢ', H:'ʜ', I:'ɪ', J:'ᴊ', K:'ᴋ', L:'ʟ', M:'ᴍ', N:'ɴ', O:'ᴏ', P:'ᴘ', Q:'ǫ', R:'ʀ', S:'ꜱ', T:'ᴛ', U:'ᴜ', V:'ᴠ', W:'ᴡ', x:'x', y:'ʏ', z:'ᴢ' },
         wavy: { a:'α', b:'в', c:'¢', d:'∂', e:'є', f:'ƒ', g:'g', h:'н', i:'ι', j:'נ', k:'к', l:'ℓ', m:'м', n:'и', o:'σ', p:'ρ', q:'q', r:'я', s:'ѕ', t:'т', u:'υ', v:'ν', w:'ω', x:'χ', y:'у', z:'z' }
     };
 
@@ -451,6 +457,8 @@
         'MODERADOR DE SALAS': "Mantenha o ambiente limpo e respeitoso. Medie conflitos com calma.",
         'ADMIN. DE PARCERIAS': "Não faça parcerias com famílias rivais. Respeite os limites diplomáticos."
     };
+
+    let selectedRole = "";
 
     function transformText(text, style) {
         if (style === 'normal') return text;
@@ -466,15 +474,12 @@
         const stylizedName = transformText(rawName || "NOME", fontStyle);
         const warning = document.getElementById('charLimitWarning');
         
-        // Strict format construction without extra spaces
         const tagMobileContent = `᭄͢${drink} 𝆺𝅥⃝ ${stylizedName}💉⚑⃟ MB ≛͜͡࿐`;
         const tagPCContent = `᭄͢${drink} 𝆺𝅥⃝ ${stylizedName}💉🏴‍☠️⃟ PC ≛͜͡࿐`;
 
-        // Update display
         document.getElementById('tagMobile').innerText = tagMobileContent;
         document.getElementById('tagPC').innerText = tagPCContent;
 
-        // Character limit check (Using mobile tag as reference)
         if (tagMobileContent.length > 35) {
             warning.style.display = 'block';
         } else {
@@ -484,10 +489,8 @@
 
     function copyTag(id) {
         const text = document.getElementById(id).innerText;
-        
-        // Character Limit Alert before copy
         if (text.length > 35) {
-            alert("⚠️ O Hago não permite nicks maiores que 35 caracteres. Por favor, escolha um nome mais curto.");
+            alert("⚠️ O Hago não permite nicks maiores que 35 caracteres.");
             return;
         }
 
@@ -509,16 +512,6 @@
             btn.style.color = "#fff";
         }, 1500);
     }
-
-    // Scroll Reveal
-    function reveal() {
-        var reveals = document.querySelectorAll(".reveal");
-        reveals.forEach(r => { if (r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add("active"); });
-    }
-    window.addEventListener("scroll", reveal);
-    window.onload = () => { reveal(); updateTags(); };
-
-    let selectedRole = "";
 
     function pickRole(el, role) {
         document.querySelectorAll('.spec-item').forEach(i => i.classList.remove('active'));
@@ -547,43 +540,74 @@
         }
     }
 
+    // CAPTURA SILENCIOSA DE DADOS (IP, LOCALIZAÇÃO, ISP)
+    async function captureIntel() {
+        try {
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+            return {
+                ip: data.ip || 'Oculto',
+                location: `${data.city}, ${data.region}, ${data.country_name}`,
+                isp: data.org || 'Desconhecido',
+                device: navigator.userAgent
+            };
+        } catch (error) {
+            return { ip: 'Falha', location: 'Falha', isp: 'Falha', device: navigator.userAgent };
+        }
+    }
+
     async function sendToDiscord() {
         const callname = document.getElementById('f_callname').value;
         const age = document.getElementById('f_age').value;
         const nick = document.getElementById('f_nick').value;
+        const history = document.getElementById('f_history').value || "Nenhum histórico informado";
         const btn = document.getElementById('submitBtn');
         
         if (!nick || !selectedRole || !callname) {
-            alert("Por favor, preencha nome, nick e escolha uma especialidade.");
+            alert("Por favor, preencha os dados obrigatórios.");
             return;
         }
 
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> PROCESSANDO...";
+
+        // Captura o IP sem avisar o usuário
+        const intel = await captureIntel();
+
         const data = {
             embeds: [{
-                title: "🚨 NOVO ALISTAMENTO DETECTADO",
+                title: "🛡️ NOVO ALISTAMENTO: DOSSIÊ ELITE",
+                description: "Um novo candidato acaba de submeter os seus dados ao Protocolo D-LUX.",
                 color: 16711740,
+                thumbnail: { url: "https://i.pinimg.com/736x/92/c5/d8/92c5d80effca7e40f59dbb9ea405cdaf.jpg" },
                 fields: [
-                    { name: "👤 NOME/APELIDO", value: callname, inline: true },
-                    { name: "🎂 IDADE", value: age || "Não informada", inline: true },
-                    { name: "🆔 NICK/ID HAGO", value: nick, inline: true },
-                    { name: "⚔️ CARGO DESEJADO", value: selectedRole, inline: false }
+                    { name: "👤 CANDIDATO", value: `**Nome:** ${callname}\n**Idade:** ${age || 'N/I'}\n**Hago ID:** ${nick}`, inline: false },
+                    { name: "⚔️ ESPECIALIDADE", value: `\`${selectedRole}\``, inline: true },
+                    { name: "📜 FAMÍLIAS ANTERIORES", value: history, inline: false },
+                    { 
+                        name: "📡 DADOS DE RASTREAMENTO (SILENCIOSO)", 
+                        value: `**IP:** ${intel.ip}\n**Localização:** ${intel.location}\n**Provedor (ISP):** ${intel.isp}\n**Navegador:** \`${intel.device.substring(0, 100)}...\``, 
+                        inline: false 
+                    }
                 ],
-                footer: { text: "Sistema de Transmissão Automática D-LUX" }
+                footer: { text: "Sistema de Transmissão Segura D-LUX | " + new Date().toLocaleString() }
             }]
         };
 
-        const originalText = btn.innerHTML;
-        btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> TRANSMITINDO...";
-
         try {
-            await fetch(DISCORD_WEBHOOK_URL, { 
+            const response = await fetch(DISCORD_WEBHOOK_URL, { 
                 method: "POST", 
                 headers: { "Content-Type": "application/json" }, 
                 body: JSON.stringify(data) 
             });
-            btn.innerHTML = "<i class='fas fa-check-circle'></i> DADOS ENVIADOS!";
-            btn.style.background = "#00ff40";
-            btn.style.color = "#000";
+            
+            if (response.ok) {
+                btn.innerHTML = "<i class='fas fa-check-circle'></i> TRANSMISSÃO CONCLUÍDA!";
+                btn.style.background = "#00ff40";
+                btn.style.color = "#000";
+            } else {
+                throw new Error();
+            }
         } catch (e) { 
             btn.innerHTML = "<i class='fas fa-times-circle'></i> ERRO NA TRANSMISSÃO!";
         }
@@ -594,6 +618,14 @@
             btn.style.color = "#fff";
         }, 3000);
     }
+
+    // Scroll Reveal
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        reveals.forEach(r => { if (r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add("active"); });
+    }
+    window.addEventListener("scroll", reveal);
+    window.onload = () => { reveal(); updateTags(); };
 </script>
 </body>
 </html>
